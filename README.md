@@ -6,31 +6,27 @@
 
 ##### 1. Get google-services.json file and FCM Server Key from Firebase Developer console
 
-##### 2. Get App ID and Smartech FCM SDK from Smartech Panel
+##### 2. Get App ID from Smartech Panel
 
-### For Integrate SDK:    (supported android minsdkversion 15 or more)
+### For FCM  Setup in Application:
 
-##### 1. Add Netcore SDK (i.e. SmartechFCMSDK.aar file) in libs folder
+##### Add google-services.json file in app directory of project
 
-##### 2. Add google-services.json file in app directory of project
-
-##### 3. Add below code at bottom of build.gradle    
-
-Add below code in dependencies of buildscript in project build.gradle (avoid if already added)
+##### Add below code in dependencies of buildscript in project build.gradle
 ```java
-    classpath 'com.google.gms:google-services:3.0.0'    //avoid if already added
+ classpath 'com.google.gms:google-services:3.0.0'
 ```
-Add below code at last line in app build.gradle
+###### Add below code at last line in app build.gradle
 ```java
-    repositories{
-       flatDir { dirs 'libs' }
-    }
-    apply plugin: 'com.google.gms.google-services'  //avoid if already added
+apply plugin: 'com.google.gms.google-services'
 ```
+
+### For Integrate SDK:    
+###### (supported android minsdkversion 15 or more (i.e. next all versions after ice cream sandwich))
+
 ##### 3. Add below code in dependencies below code: (not in child dependencies)
 ```java
-    compile(name:'SmartechFCMSDK', ext:'aar')
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile "in.netcore.smartechfcm:smartech-fcm:1.0.3"
     compile 'com.google.firebase:firebase-messaging:9.6.0'
 ```
 ### For Push Notification as well as inbuilt activities
@@ -96,4 +92,5 @@ Ex.
     <data android:scheme = "smartech" android :host= "products" />
     </intent-filter>
 ```
+
 
