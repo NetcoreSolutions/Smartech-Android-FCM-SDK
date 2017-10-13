@@ -10,13 +10,14 @@
 
 ### For FCM  Setup in Application:
 
-##### Add google-services.json file in app directory of project
+##### 1. Add google-services.json file in app directory of project
 
-##### Add below code in dependencies of buildscript in project build.gradle
+##### 2. Add below code in dependencies of buildscript in project build.gradle
 ```java
  classpath 'com.google.gms:google-services:3.0.0'
 ```
-###### Add below code at last line in app build.gradle
+
+##### 3. Add below code at last line in app build.gradle
 ```java
 apply plugin: 'com.google.gms.google-services'
 ```
@@ -24,7 +25,7 @@ apply plugin: 'com.google.gms.google-services'
 ### For Integrate SDK:    
 ###### (supported android minsdkversion 15 or more (i.e. next all versions after ice cream sandwich))
 
-##### 3. Add below code in dependencies below code: (not in child dependencies)
+##### Add below code in dependencies below code: (not in child dependencies)
 ```java
     compile "in.netcore.smartechfcm:smartech-fcm:1.0.3"
     compile 'com.google.firebase:firebase-messaging:9.6.0'
