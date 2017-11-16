@@ -33,7 +33,7 @@ apply plugin: 'com.google.gms.google-services'
 ### For Push Notification as well as inbuilt activities
 Add below code in launcher Activity in method onCreate (above the super.onCreate line)
 ```java
-    NetcoreSDK.register(getApplication(),”<App ID>”, “<identity>”);
+    NetcoreSDK.register(getApplication(),”<AppID>”, “<identity>”);
     //Identity must be “”(blank) or Primary key which defined on smartech Panel
     //With this code, SDK will start sending App Launch and First Launch activities by default.
 ```
