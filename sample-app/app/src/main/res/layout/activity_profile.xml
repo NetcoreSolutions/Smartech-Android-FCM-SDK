@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorAccent"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/login_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="Profile "
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/inputKey"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Primary Key"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inoutAge"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Age"
+            android:inputType="number"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputSalary"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Salary in Rs."
+            android:inputType="numberDecimal"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputMobile"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Mobile"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputWebsite"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Website"
+            android:inputType="textUri"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inoutDOB"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/background_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="DOB"
+            android:inputType="date"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@color/colorPrimaryDark"
+            android:padding="3dp"
+            android:text="Save"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

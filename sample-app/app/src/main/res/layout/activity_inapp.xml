@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:scrollIndicators="top"
+    android:background="#0df1bc">
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/InApp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="InApp"
+        android:layout_gravity="center"
+        android:layout_marginTop="94dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Sticky header"
+        android:id="@+id/btnhead"
+        android:layout_below="@+id/InApp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Sticky Footer"
+        android:id="@+id/btnfoot"
+        android:layout_below="@+id/btnhead"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="interstatial"
+        android:id="@+id/btnfull"
+        android:layout_below="@+id/btnfoot"
+        android:layout_alignLeft="@+id/btnhead"
+        android:layout_alignStart="@+id/btnhead" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Half Interstatial"
+        android:id="@+id/btnhalf"
+        android:layout_below="@+id/btnfull"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Interactive"
+        android:id="@+id/btnjquery"
+        android:layout_below="@+id/btnhalf"
+        android:layout_alignLeft="@+id/btnfull"
+        android:layout_alignStart="@+id/btnfull" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="All C2A"
+        android:id="@+id/btnc2a"
+        android:layout_below="@+id/btnjquery"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="In App Engagement"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="animation"
+        android:id="@+id/btnanim"
+        android:layout_below="@+id/btnc2a"
+        android:layout_alignLeft="@+id/btnjquery"
+        android:layout_alignStart="@+id/btnjquery" />
+
+
+</RelativeLayout>
