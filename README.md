@@ -27,7 +27,7 @@ apply plugin: 'com.google.gms.google-services'
 
 ##### Add below code in dependencies below code: (not in child dependencies)
 ```java
-    compile 'in.netcore.smartechfcm:smartech-fcm:1.0.5'
+    compile 'in.netcore.smartechfcm:smartech-fcm:1.0.6'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
 ```
 ### For Push Notification as well as inbuilt activities
