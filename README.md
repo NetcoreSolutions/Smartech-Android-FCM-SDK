@@ -86,6 +86,13 @@ drawable-xhdpi :- 48 x 48 <br/>
 drawable-xxhdpi :- 72 x 72 <br/>
 drawable-xxxhdpi :- 96 x 96 <br/>
 
+### To fetch delivered push notifications
+##### Add below code in activity:
+```java
+JSONArray jsonNotification = NetcoreSDK.getNotifications(context);
+```
+Note: The method will return a JSONArray of push notifications delievered
+
 ### Go to tools->android and click on sync project with gradle files
 
 ### Run the application
