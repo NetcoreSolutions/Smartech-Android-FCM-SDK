@@ -27,7 +27,7 @@ apply plugin: 'com.google.gms.google-services'
 
 ##### Add below code in dependencies below code: (not in child dependencies)
 ```java
-    compile 'in.netcore.smartechfcm:smartech-fcm:1.0.6'
+    compile 'in.netcore.smartechfcm:smartech-fcm:1.0.7'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
 ```
 ### For Push Notification as well as inbuilt activities
@@ -71,6 +71,21 @@ Add below code in activity where you passing all details for profile:-
     }
     //Attribute name must be in Capital such as NAME, AGE etc.
 ```
+### To set custom push notification icon
+##### Add below code in launching activity:-
+```java
+NetcoreSDK.setPushIcon(context, "<path to drawable icon>");
+
+e.g. NetcoreSDK.setPushIcon(getApplicationContext(), R.mipmap.ic_launcher);
+```
+Note: The notification icon should be strictly in .png format as per Google's guidelines & Preferable size for push notification icons is mentioned below:
+
+drawable-mdpi :- 24 x 24 <br/>
+drawable-hdpi :- 36 x 36 <br/>
+drawable-xhdpi :- 48 x 48 <br/>
+drawable-xxhdpi :- 72 x 72 <br/>
+drawable-xxxhdpi :- 96 x 96 <br/>
+
 ### Go to tools->android and click on sync project with gradle files
 
 ### Run the application
