@@ -27,7 +27,7 @@ apply plugin: 'com.google.gms.google-services'
 
 ##### Add below code in dependencies below code: (not in child dependencies)
 ```java
-    compile 'in.netcore.smartechfcm:smartech-fcm:1.0.8'
+    compile 'in.netcore.smartechfcm:smartech-fcm:1.0.9'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
 ```
 ### For Push Notification as well as inbuilt activities
@@ -93,6 +93,18 @@ JSONArray jsonNotification = NetcoreSDK.getNotifications(context);
 ```
 Note: The method will return a JSONArray of push notifications delievered
 
+### To use push notifications along with custom Firebase Messaging Class
+#### Add below code in Firebase Messaging Class:
+
+```java
+boolean pushFromSmartech = NetcoreSDK.handleNotification(context, remoteMessage);
+```
+Note:  The behaviour of the method mentioned above is as follows:
+
+- It returns true, if the push notification is received from the Smartech panel. In this case, the SDK will do the needful itself without any extra efforts. 
+
+-  It returns false, in case if the push notification is not received from the Smartech panel. In this case, one can handle the push notification as per their custom implementation of Firebase Messaging Class or pass on the instructions to some other SDK as per the choice.
+
 ### Go to tools->android and click on sync project with gradle files
 
 ### Run the application
@@ -115,5 +127,3 @@ Ex.
     <data android:scheme = "smartech" android :host= "products" />
     </intent-filter>
 ```
-
-
