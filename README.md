@@ -23,7 +23,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 
 ### For Integrate SDK:    
-###### (supported android minsdkversion 16 or more (i.e. next all versions after ice cream sandwich))
+###### (supported android minsdkversion 16 or more (i.e. jelly bean and above))
 
 ##### Add below code in dependencies of build.gradle file of app: (not in child dependencies)
 ```java
