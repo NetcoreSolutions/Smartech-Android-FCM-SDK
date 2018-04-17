@@ -23,9 +23,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 
 ### For Integrate SDK:    
-###### (supported android minsdkversion 15 or more (i.e. next all versions after ice cream sandwich))
+###### (supported android minsdkversion 16 or more (i.e. next all versions after ice cream sandwich))
 
-##### Add below code in dependencies below code: (not in child dependencies)
+##### Add below code in dependencies of build.gradle file of app: (not in child dependencies)
 ```java
     compile 'in.netcore.smartechfcm:smartech-fcm:1.0.9'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
