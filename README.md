@@ -14,7 +14,7 @@
 
 ##### 2. Add below code in dependencies of buildscript in project build.gradle
 ```java
- classpath 'com.google.gms:google-services:3.0.0'
+ classpath 'com.google.gms:google-services:3.1.0'
 ```
 
 ##### 3. Add below code at last line in app build.gradle
@@ -27,8 +27,8 @@ apply plugin: 'com.google.gms.google-services'
 
 ##### Add below code in dependencies of build.gradle file of app: (not in child dependencies)
 ```java
-    compile 'in.netcore.smartechfcm:smartech-fcm:1.0.9'
-    compile 'com.google.firebase:firebase-messaging:11.6.0'
+    compile 'in.netcore.smartechfcm:smartech-fcm:1.1.1'
+    compile 'com.google.firebase:firebase-messaging:11.6.2'
 ```
 ### For Push Notification as well as inbuilt activities
 Add below code in launcher Activity in method onCreate (above the super.onCreate line)
@@ -104,6 +104,20 @@ Note:  The behaviour of the method mentioned above is as follows:
 - It returns true, if the push notification is received from the Smartech panel. In this case, the SDK will do the needful itself without any extra efforts. 
 
 -  It returns false, in case if the push notification is not received from the Smartech panel. In this case, one can handle the push notification as per their custom implementation of Firebase Messaging Class or pass on the instructions to some other SDK as per the choice.
+
+### If user wants to opt out from being tracked
+#### Add below code
+
+```java
+NetcoreSDK.optOut(context, <boolean_flag>);
+```
+Note:  The method mentioned above accepts a compulsory boolean value (true/false).
+
+- If an end user wants to opt out, the flag should be passed as **true**. Once the user opts out, Netcore SDK will not be able to track that particular user further and no communications will be received by that user. </br>
+**e.g. NetcoreSDK.optOut(context, true);**
+
+- If an end user wants to opt in, the flag should be passed as **false**. Once the user opts in, Netcore SDK will be able to track that particular user further and next communications will be received by that user.</br>
+**e.g NetcoreSDK.optOut(context, false);**
 
 ### Go to tools->android and click on sync project with gradle files
 
