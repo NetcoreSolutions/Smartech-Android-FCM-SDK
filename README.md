@@ -15,6 +15,7 @@
 ##### 2. Add below code in dependencies of buildscript in project build.gradle
 ```java
  classpath 'com.google.gms:google-services:3.1.0'
+ classpath​ ​'com.android.tools.build:gradle:3.1.3'
 ```
 
 ##### 3. Add below code at last line in app build.gradle
@@ -27,7 +28,7 @@ apply plugin: 'com.google.gms.google-services'
 
 ##### Add below code in dependencies of build.gradle file of app: (not in child dependencies)
 ```java
-    compile 'in.netcore.smartechfcm:smartech-fcm:1.1.1'
+    compile 'in.netcore.smartechfcm:smartech-fcm:1.1.2'
     compile 'com.google.firebase:firebase-messaging:11.6.2'
 ```
 ### For Push Notification as well as inbuilt activities
