@@ -28,8 +28,10 @@ apply plugin: 'com.google.gms.google-services'
 
 ##### Add below code in dependencies of build.gradle file of app: (not in child dependencies)
 ```java
-    compile 'in.netcore.smartechfcm:smartech-fcm:1.1.2'
-    compile 'com.google.firebase:firebase-messaging:11.6.2'
+    implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.3'
+    implementation 'com.google.firebase:firebase-messaging:11.6.2'
+    implementation​​ 'com.google.code.gson:gson:2.8.0'
+    implementation​​ 'com.firebase:firebase-jobdispatcher:0.8.5'
 ```
 ### For Push Notification as well as inbuilt activities
 Add below code in launcher Activity in method onCreate (above the super.onCreate line)
@@ -119,6 +121,19 @@ Note:  The method mentioned above accepts a compulsory boolean value (true/false
 
 - If an end user wants to opt in, the flag should be passed as **false**. Once the user opts in, Netcore SDK will be able to track that particular user further and next communications will be received by that user.</br>
 **e.g NetcoreSDK.optOut(context, false);**
+
+### To track location of the user
+#### Add below code
+
+```java
+NetcoreSDK.setUserLocation(context, <double_latitude>, <double_longitude>);
+```
+Note:  The method mentioned above accepts 3 parameters including context, latitude & longitude. Data type of ‘latitude’ & ‘longitude’ should compulsorily be ​'Double​​'.
+
+- If an end user wants to opt out, the flag should be passed as **true**. Once the user opts out, Netcore SDK will not be able to track that particular user further and no communications will be received by that user. </br>
+**e.g. NetcoreSDK.setUserLocation(context, 18.9431, 72.8272);**
+
+- In case if any one of the parameters is ​null​​, the SDK will not be able to persist user location.</br>
 
 ### Go to tools->android and click on sync project with gradle files
 
