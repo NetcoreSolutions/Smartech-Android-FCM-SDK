@@ -128,7 +128,7 @@ Note:  The method mentioned above accepts a compulsory boolean value (true/false
 ```java
 NetcoreSDK.setUserLocation(context, <double_latitude>, <double_longitude>);
 ```
-Note:  The method mentioned above accepts 3 parameters including context, latitude & longitude. Data type of ‘latitude’ & ‘longitude’ should compulsorily be ​'Double​​'.
+Note:  The method mentioned above accepts 3 parameters including context, latitude & longitude. Data type of ‘latitude’ & ‘longitude’ should compulsorily be ​'Double​​'.</br>
 **e.g. NetcoreSDK.setUserLocation(context, 18.9431, 72.8272);**
 
 - In case if any one of the parameters is ​null​​, the SDK will not be able to persist user location.</br>
