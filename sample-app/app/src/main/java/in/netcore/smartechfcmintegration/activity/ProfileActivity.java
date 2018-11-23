@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity
                         profileDetails.put( "WEBSITE", inputWebsite.getText().toString() );
                         profileDetails.put ( "EMAILID", inputEmail.getText().toString() );
 
-                        NetcoreSDK.profile(getApplicationContext(), inputKey.getText().toString(), profileDetails);
+                        NetcoreSDK.profile(getApplicationContext(), profileDetails);
                         SharedPreferences pref = getApplicationContext().getSharedPreferences("storedData", 0); // 0 - for private mode
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("identity", inputKey.getText().toString());

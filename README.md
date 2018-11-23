@@ -1,157 +1,205 @@
-## [![Netcore Logo](https://netcore.in/wp-content/themes/netcore/img/Netcore-new-Logo.png)](http:www.netcore.in) SDK For Native Android Application Using FCM
 
-##### (for cordova android Application follow above cordova PDF )
-
+## [![Netcore Logo](https://netcore.in/wp-content/themes/netcore/img/Netcore-new-Logo.png)](http:www.netcore.in)  FCM SDK For Native Android Apps
 ### Prerequisites
+##### 1. google-services.json file from [Firebase Console](https://console.firebase.google.com/)
+##### 2. Legacy Server Key​​ from ​Firebase Console
+##### 3. App Id from Smartech Panel
+**Note:** Minimum SDK version (minSdkVersion) available in the build.gradle file of the
+app should be at least 16 (Jelly Bean) or above.
 
-##### 1. Get google-services.json file and FCM Server Key from Firebase Developer console
-
-##### 2. Get App ID from Smartech Panel
-
-### For FCM  Setup in Application:
-
-##### 1. Add google-services.json file in app directory of project
-
-##### 2. Add below code in dependencies of buildscript in project build.gradle
+### Integration Steps:
+#### Setting up FCM in the application:
+##### 1. Add google-services.json file in app directory of the project.
+##### 2. Adding dependencies given below in ​ build.gradle file of the project​.​
 ```java
- classpath 'com.google.gms:google-services:3.1.0'
- classpath​ ​'com.android.tools.build:gradle:3.1.3'
+classpath 'com.google.gms:google-services:3.1.0'
+classpath​ ​'com.android.tools.build:gradle:3.1.3'
 ```
-
-##### 3. Add below code at last line in app build.gradle
+##### 3. Adding below code in the ​ build.gradle file of the app​​.
 ```java
 apply plugin: 'com.google.gms.google-services'
 ```
-
-### For Integrate SDK:    
-###### (supported android minsdkversion 16 or more (i.e. jelly bean and above))
-
-##### Add below code in dependencies of build.gradle file of app: (not in child dependencies)
+#### Adding dependencies in the build.gradle file of the app
 ```java
-    implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.3'
-    implementation 'com.google.firebase:firebase-messaging:11.6.2'
-    implementation​​ 'com.google.code.gson:gson:2.8.0'
-    implementation​​ 'com.firebase:firebase-jobdispatcher:0.8.5'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.5'
+implementation 'com.google.firebase:firebase-messaging:11.6.2'
+implementation​​ 'com.google.code.gson:gson:2.8.0'
+implementation​​ 'com.firebase:firebase-jobdispatcher:0.8.5'
 ```
-### For Push Notification as well as inbuilt activities
-Add below code in launcher Activity in method onCreate (above the super.onCreate line)
+#### To register device for push notifications
+To register the device for receiving push notifications from Smartech panel​ ,
+add given snippet inside the **onCreate method of the Application class​​**.
 ```java
-    NetcoreSDK.register(getApplication(),”<AppID>”, “<identity>”);
-    //Identity must be “”(blank) or Primary key which defined on smartech Panel
-    //With this code, SDK will start sending App Launch and First Launch activities by default.
+NetcoreSDK.register(this, <app_id>);
 ```
-### For Login Activity 
-add below code for login activity to make user Identified:
+#### To capture user login
+To capture login activity of the user, add given snippet inside the
+activity/fragment when the user gets logged in successfully.
 ```java
-    NetcoreSDK.login( context, “<identity>” );
+NetcoreSDK.setIdentity(context, <unique_user_identity>);
+NetcoreSDK.login(context);
 ```
-### For Logout Activity 
-add below code for logout activity:
+#### To capture user logout
+To capture log out activity of the user, add given snippet inside the
+activity/fragment when the user gets logged out successfully.
 ```java
-    NetcoreSDK.logout( context, “<identity>” );
+NetcoreSDK.logout(context);
+NetcoreSDK.clearIdentity(context);
 ```
-### For Activity tracking 
-add below code for every activity:
+**Note:​​** Avoid calling ‘clearIdentity’ method if one wants to track user activity
+even if user has logged out of the application.
+#### To capture custom activity
+To capture custom activity performed by the user, add given snippet as per
+the requirement.
 ```java
-    NetcoreSDK.track( context, “<identity>”,<eventId>,payload);
-    //Activity tracking code can be generated from Smartech panel
+NetcoreSDK.track(context, <event_name>, payload.toString());
+
+e.g.
+JSONObject jsonObject = new JSONObject();
+JSONObject payload = new JSONObject();
+try {
+	payload.put("name", "Nexus 5");
+	payload.put("prid", 2);
+	payload.put("price", 15000);
+	payload.put("prqt", 1);
+	jsonObject.put("payload", payload);
+	NetcoreSDK.track(context, "Add To Cart", jsonObject.toString());
+}
+catch (JSONException e) {
+	e.printStackTrace(); 
+}
 ```
-### For Profile Update
-Add below code in activity where you passing all details for profile:-
+**Note​​:** Prior implementation of custom activity tracking with event id will be
+also supported by the SDK.
+#### To capture user attributes
+To capture and map user attributes, add given snippet as per the
+requirement.
 ```java
-    NetcoreSDK.profile(this, “<identity>”, newprofile); 
-    //newProfile is JSONObject with all details of User
-    E.g. 
-    JSONObject newProfile = new JSONObject();
-    try {
-    newProfile.put( "NAME", "Developer" );
-    newProfile.put( "AGE", 25 );
-    newProfile.put( "MOBILE", "1234567890" );
-    NetcoreSDK.profile(this, “<identity>”, newprofile);
-    }
-    catch ( JSONException e ) {
-    e.printStackTrace();
-    }
-    //Attribute name must be in Capital such as NAME, AGE etc.
+NetcoreSDK.profile(context, <profile_object>);
+
+e.g. 
+JSONObject profile = new JSONObject();
+try {
+	profile.put("NAME", "John Doe");
+	profile.put("AGE", 35);
+	profile.put("MOBILE", 9876543210);
+	NetcoreSDK.profile(context, profile);
+}
+catch (JSONException e) {
+	e.printStackTrace();
+}
 ```
-### To set custom push notification icon
-##### Add below code in launching activity:-
+**Note:** Use attribute name in capital letters as shown above.
+#### To use custom push notification icon
+SDK uses launcher icon for push notifications by default and in order to
+change it, use a custom icon by adding given snippet inside ​**onCreate
+method of the Application class​**.
 ```java
-NetcoreSDK.setPushIcon(context, "<path to drawable icon>");
+NetcoreSDK.setPushIcon(context, <path_to_drawable_icon>);
 
-e.g. NetcoreSDK.setPushIcon(getApplicationContext(), R.mipmap.ic_launcher);
+e.g. 
+NetcoreSDK.setPushIcon(context, R.drawable.ic_push_icon);
 ```
-Note: The notification icon should be strictly in .png format as per Google's guidelines & Preferable size for push notification icons is mentioned below:
-
-drawable-mdpi :- 24 x 24 <br/>
-drawable-hdpi :- 36 x 36 <br/>
-drawable-xhdpi :- 48 x 48 <br/>
-drawable-xxhdpi :- 72 x 72 <br/>
-drawable-xxxhdpi :- 96 x 96 <br/>
-
-### To fetch delivered push notifications
-##### Add below code in activity:
+**Note:** The notification icon being used should strictly be in .png format as per
+[Google’s guidelines](https://developer.android.com/guide/practices/ui_guidelines/icon_design_status_bar)​. Preferable size for the push notification icons are
+mentioned below.
+```c
+drawable-mdpi 		: 	24 x 24
+drawable-hdpi 		: 	36 x 36 
+drawable-xhdpi 		: 	48 x 48
+drawable-xxhdpi 	: 	72 x 72
+drawable-xxxhdpi 	: 	96 x 96
+```
+#### To fetch delivered push notifications
+To fetch delivered push notifications, add given snippet as per the
+requirement.
 ```java
-JSONArray jsonNotification = NetcoreSDK.getNotifications(context);
+JSONArray notifications = NetcoreSDK.getNotifications(context);
+				OR
+JSONArray notifications = NetcoreSDK.getNotifications(context, <count>);
 ```
-Note: The method will return a JSONArray of push notifications delievered
+**Note:** The method returns a ‘JSONArray’ of delivered push notifications for
+the user. ​**By default the method returns last 10 delivered notifications​​**.
 
-### To use push notifications along with custom Firebase Messaging Class
-#### Add below code in Firebase Messaging Class:
-
+#### To implement push notifications in existing FCM class
+To use push notifications from Smartech panel along with existing set up of
+the FCM class, add given snippet ​**inside the FCM receiver class​​**.
 ```java
-boolean pushFromSmartech = NetcoreSDK.handleNotification(context, remoteMessage);
+boolean pushFromSmartech = NetcoreSDK.handleNotification(context, remoteMessage.getData());
 ```
-Note:  The behaviour of the method mentioned above is as follows:
+**Note​​:** The method returns a boolean value.
 
-- It returns true, if the push notification is received from the Smartech panel. In this case, the SDK will do the needful itself without any extra efforts. 
+- Returns **true​**, if the push notification is received from the Smartech panel. It
+will also render the push notification without any extra efforts further.
 
--  It returns false, in case if the push notification is not received from the Smartech panel. In this case, one can handle the push notification as per their custom implementation of Firebase Messaging Class or pass on the instructions to some other SDK as per the choice.
-
-### If user wants to opt out from being tracked
-#### Add below code
-
+- Return ​**false​**, if the push notification is not received from the Smartech
+panel. In this case, handle the push notification at your end as per the
+requirement.
+#### To opt out user from being tracked (GDPR Policy)
+If the end user wants to opt out of being tracked, add given snippet as per the
+requirement.
 ```java
 NetcoreSDK.optOut(context, <boolean_flag>);
 ```
-Note:  The method mentioned above accepts a compulsory boolean value (true/false).
+**Note​​:** The method accepts a boolean value.
 
-- If an end user wants to opt out, the flag should be passed as **true**. Once the user opts out, Netcore SDK will not be able to track that particular user further and no communications will be received by that user. </br>
-**e.g. NetcoreSDK.optOut(context, true);**
+- If an end user wants to opt out, the flag should be passed as **true**. Once the
+user opts out, SDK will not be able to track that particular user further and no
+communications will be received by that user.
 
-- If an end user wants to opt in, the flag should be passed as **false**. Once the user opts in, Netcore SDK will be able to track that particular user further and next communications will be received by that user.</br>
-**e.g NetcoreSDK.optOut(context, false);**
+- If an end user wants to opt in, the flag should be passed as **false**. Once the
+user opts in, SDK will be able to track that particular user further and next
+communications will be received by that user.
 
-### To track location of the user
-#### Add below code
-
+#### To implement location tracking
+In order to track user location and pass it further to Smartech, add given
+snippet as per the requirement.
 ```java
-NetcoreSDK.setUserLocation(context, <double_latitude>, <double_longitude>);
+NetcoreSDK.setUserLocation(context, <double_lat>, <double_long>);
 ```
-Note:  The method mentioned above accepts 3 parameters including context, latitude & longitude. Data type of ‘latitude’ & ‘longitude’ should compulsorily be ​'Double​​'.</br>
-**e.g. NetcoreSDK.setUserLocation(context, 18.9431, 72.8272);**
+**Note:** The method mentioned above accepts 3 parameters including context,
+latitude & longitude. **Data type of ‘latitude’ & ‘longitude’ should
+compulsorily be 'Double'**. In case if any parameter is null, SDK will not be
+able to persist user location.
+#### To set user identity
+In order to identify a user, set unique user identity by adding given snippet as
+per the requirement.
+```java
+NetcoreSDK.setIdentity(context, <unique_user_identity>);
+```
+#### To clear user identity
+In order to wipe out user identity from the SDK, add given snippet as per the
+requirement.
+```java
+NetcoreSDK.clearIdentity(context);
+```
+#### To set existing FCM token
+To set existing FCM token of the application to the SDK, **add given snippet
+just before ‘NetcoreSDK.register’ method in the Application class of the
+app**.
+```java
+NetcoreSDK.setPushToken(context, <token_string>);
 
-- In case if any one of the parameters is ​null​​, the SDK will not be able to persist user location.</br>
-
-### Go to tools->android and click on sync project with gradle files
-
-### Run the application
-
-### To support deeplink in application
-Add these peice of code in AndroidManifest.xml file in each activity in which you want Deep-Link.
-
+e.g.
+NetcoreSDK.setPushToken(context, <token_string>);
+NetcoreSDK.register(this, <app_id>);
+```
+#### To implement deeplink in the application
+To implement deeplink in the application, add given snippet **inside AndroidManifest.xml file with in the Activity Tag**.
 ```xml
-    <intent-filter>
-    <action android:name = "android.intent.action.VIEW" />
-    <category android:name = "android.intent.category.DEFAULT" />
-    <category android:name = "android.intent.category.BROWSABLE" />
-    <data android:scheme = "<scheme name>" android :host= "<hostname>" />
-    </intent-filter>
-Ex.
-    <intent-filter>
-    <action android:name= "android.intent.action.VIEW" />
-    <category android:name= "android.intent.category.DEFAULT" />
-    <category android:name= "android.intent.category.BROWSABLE" />
-    <data android:scheme = "smartech" android :host= "products" />
-    </intent-filter>
+<intent-filter>
+	<action android:name = "android.intent.action.VIEW"/>
+	<category android:name = "android.intent.category.DEFAULT"/>
+	<category android:name = "android.intent.category.BROWSABLE"/>
+	<data android:scheme = "<scheme>" android:host= "<host>"/>
+</intent-filter>
+    
+e.g.
+<intent-filter>
+	<action android:name= "android.intent.action.VIEW"/>
+	<category android:name= "android.intent.category.DEFAULT"/>
+	<category android:name= "android.intent.category.BROWSABLE"/>
+	<data android:scheme = "smartech" android:host= "products"/>
+</intent-filter>
 ```
+

@@ -20,12 +20,9 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     TextView btnSkip, btnSignUp;
     EditText inputEmail, inputPassword;
-    String identity = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        SharedPreferences pref = this.getSharedPreferences("storedData", 0); // 0 - for private mode
-        identity = pref.getString("identity", "");
-        NetcoreSDK.register(getApplication(), "<AppId>", identity);
+        NetcoreSDK.register(getApplication(), "<AppId>");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -35,46 +32,41 @@ public class LoginActivity extends AppCompatActivity {
         btnSkip = (TextView) findViewById(R.id.btnSkip);
         btnSignUp = (TextView) findViewById(R.id.btnSignUp);
 
-        if(!identity.equals("")){
-            Intent intent = new Intent(LoginActivity.this, ActionActivity.class);
-            startActivity(intent);
-        }else {
-            btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    String getEmailId = inputEmail.getText().toString();
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("storedData", 0); // 0 - for private mode
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("identity", getEmailId);
-                    editor.commit();
+            @Override
+            public void onClick(View v) {
+                String getEmailId = inputEmail.getText().toString();
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("storedData", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("identity", getEmailId);
+                editor.commit();
+                NetcoreSDK.setIdentity(LoginActivity.this, "<unique_user_identity>");
+                NetcoreSDK.login(LoginActivity.this);
+                Intent intent = new Intent(LoginActivity.this, ActionActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
 
-                    NetcoreSDK.login(LoginActivity.this, getEmailId);
-                    Intent intent = new Intent(LoginActivity.this, ActionActivity.class);
-                    startActivity(intent);
-                }
-            });
-            btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnSkip.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                    startActivity(intent);
-                }
-            });
-            btnSkip.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("storedData", 0); // 0 - for private mode
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("identity", "");
-                    editor.commit();
-                    Intent intent = new Intent(LoginActivity.this, ActionActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("storedData", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("identity", "");
+                editor.commit();
+                Intent intent = new Intent(LoginActivity.this, ActionActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

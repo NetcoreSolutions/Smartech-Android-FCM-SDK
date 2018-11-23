@@ -16,7 +16,6 @@ import in.netcore.smartechfcmintegration.R;
 
 
 public class ActionActivity extends AppCompatActivity {
-    private static String identity = "";
     Button btnaddtocart ,btncheckout, btnpagebrowse, btncartexpiry, btnremovefromcart, btncustom101, btncustom102, btninapp;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,10 +30,6 @@ public class ActionActivity extends AppCompatActivity {
         btncustom101 = (Button) findViewById(R.id.btncustom101);
         btninapp = (Button) findViewById(R.id.btninapp);
         btncustom102 = (Button) findViewById(R.id.btncustom102);
-
-
-        SharedPreferences pref = this.getSharedPreferences("storedData", 0); // 0 - for private mode
-        identity = pref.getString("identity", "");
 
         btnpagebrowse.setOnClickListener(new View.OnClickListener() {
 
@@ -52,7 +47,7 @@ public class ActionActivity extends AppCompatActivity {
                     jsonObject.put( "i^prqt",  1);
                     jsonArray.put( jsonObject );
                     newPaylaod.put( "payload", jsonArray );
-                    NetcoreSDK.track( ActionActivity.this, identity, 1, newPaylaod.toString());
+                    NetcoreSDK.track( ActionActivity.this, 1, newPaylaod.toString());
                 }
                 catch ( JSONException e ) {
                     e.printStackTrace();
@@ -74,7 +69,7 @@ public class ActionActivity extends AppCompatActivity {
                     jsonObject.put( "i^prqt",  1);
                     jsonArray.put( jsonObject );
                     newPaylaod.put( "payload", jsonArray );
-                    NetcoreSDK.track( ActionActivity.this, identity, 2, newPaylaod.toString());
+                    NetcoreSDK.track( ActionActivity.this, 2, newPaylaod.toString());
                 }
                 catch ( JSONException e ) {
                     e.printStackTrace();
@@ -96,7 +91,7 @@ public class ActionActivity extends AppCompatActivity {
                     jsonObject.put( "i^prqt",  1);
                     jsonArray.put( jsonObject );
                     newPaylaod.put( "payload", jsonArray );
-                    NetcoreSDK.track( ActionActivity.this, identity, 3, newPaylaod.toString());
+                    NetcoreSDK.track( ActionActivity.this, 3, newPaylaod.toString());
                 }
                 catch ( JSONException e ) {
                     e.printStackTrace();
@@ -118,7 +113,7 @@ public class ActionActivity extends AppCompatActivity {
                     jsonObject.put( "i^prqt",  1);
                     jsonArray.put( jsonObject );
                     newPaylaod.put( "payload", jsonArray );
-                    NetcoreSDK.track( ActionActivity.this, identity, 4, newPaylaod.toString());
+                    NetcoreSDK.track( ActionActivity.this, 4, newPaylaod.toString());
                 }
                 catch ( JSONException e ) {
                     e.printStackTrace();
@@ -139,7 +134,7 @@ public class ActionActivity extends AppCompatActivity {
                     jsonObject.put( "i^prqt",  1);
                     jsonArray.put( jsonObject );
                     newPaylaod.put( "payload", jsonArray );
-                    NetcoreSDK.track( ActionActivity.this, identity, 5, newPaylaod.toString());
+                    NetcoreSDK.track( ActionActivity.this, 5, newPaylaod.toString());
                 }
                 catch ( JSONException e ) {
                     e.printStackTrace();
@@ -164,7 +159,8 @@ public class ActionActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("identity", "");
                 editor.commit();
-                NetcoreSDK.logout( ActionActivity.this, identity);
+                NetcoreSDK.logout( ActionActivity.this);
+                NetcoreSDK.clearIdentity(ActionActivity.this);
                 Intent intent = new Intent(ActionActivity.this, LoginActivity.class);
                 startActivity( intent );
             }
