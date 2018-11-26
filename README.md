@@ -27,7 +27,7 @@ implementation​​ 'com.google.code.gson:gson:2.8.0'
 implementation​​ 'com.firebase:firebase-jobdispatcher:0.8.5'
 ```
 #### To register device for push notifications
-To register the device for receiving push notifications from Smartech panel​ ,
+To register the device for receiving push notifications from Smartech panel​,
 add given snippet inside the **onCreate method of the Application class​​**.
 ```java
 NetcoreSDK.register(this, <app_id>);
@@ -40,7 +40,7 @@ NetcoreSDK.setIdentity(context, <unique_user_identity>);
 NetcoreSDK.login(context);
 ```
 #### To capture user logout
-To capture log out activity of the user, add given snippet inside the
+To capture logout activity of the user, add given snippet inside the
 activity/fragment when the user gets logged out successfully.
 ```java
 NetcoreSDK.logout(context);
@@ -175,7 +175,7 @@ NetcoreSDK.clearIdentity(context);
 ```
 #### To set existing FCM token
 To set existing FCM token of the application to the SDK, **add given snippet
-just before ‘NetcoreSDK.register’ method in the Application class of the
+just before ‘register’ method in the Application class of the
 app**.
 ```java
 NetcoreSDK.setPushToken(context, <token_string>);
