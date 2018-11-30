@@ -184,6 +184,16 @@ e.g.
 NetcoreSDK.setPushToken(context, <token_string>);
 NetcoreSDK.register(this, <app_id>);
 ```
+#### To get GUID of the user
+To obtain GUID of the user from the SDK, add given snippet as per the requirement.
+```java
+NetcoreSDK.getGUID(context);
+```
+#### To get FCM token of the user
+To obtain the FCM token of the user from the SDK, add given snippet as per the requirement.
+```java
+NetcoreSDK.getPushToken(context);
+```
 #### To implement deeplink in the application
 To implement deeplink in the application, add given snippet **inside AndroidManifest.xml file with in the Activity Tag**.
 ```xml
