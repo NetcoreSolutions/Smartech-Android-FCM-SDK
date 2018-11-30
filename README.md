@@ -21,7 +21,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.5'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.6'
 implementation 'com.google.firebase:firebase-messaging:11.6.2'
 implementation​​ 'com.google.code.gson:gson:2.8.0'
 implementation​​ 'com.firebase:firebase-jobdispatcher:0.8.5'
