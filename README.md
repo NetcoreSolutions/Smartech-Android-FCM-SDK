@@ -2,7 +2,7 @@
 ## [![Netcore Logo](https://netcore.in/wp-content/themes/netcore/img/Netcore-new-Logo.png)](http:www.netcore.in)  FCM SDK For Native Android Apps
 ### Prerequisites
 ##### 1. google-services.json file from [Firebase Console](https://console.firebase.google.com/)
-##### 2. Legacy Server Key​​ from ​Firebase Console
+##### 2. Server Key​​ from ​Firebase Console
 ##### 3. App Id from Smartech Panel
 **Note:** Minimum SDK version (minSdkVersion) available in the build.gradle file of the
 app should be at least 16 (Jelly Bean) or above.
