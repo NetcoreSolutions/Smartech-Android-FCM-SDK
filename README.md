@@ -1,5 +1,8 @@
-
 ## [![Netcore Logo](https://netcore.in/wp-content/themes/netcore/img/Netcore-new-Logo.png)](http:www.netcore.in)  FCM SDK For Native Android Apps
+Smartech is a omni channel platform that delivers everything you need to drive mobile engagement and create valuable consumer relationships on mobile. The Smartech android SDK enables your native android app to use all of the features. This guide contains all the information you need to integrate the Smartech Android SDK into your app.
+#### For detailed integration document visit the given [link](https://docs.netcoresmartech.com/docs/android-sdk).
+#### To know more about Smartech visit the given [link](https://docs.netcoresmartech.com/).
+#### To view the change logs visit the given [link](https://docs.netcoresmartech.com/docs/android-sdk-changelog).
 ### Prerequisites
 ##### 1. google-services.json file from [Firebase Console](https://console.firebase.google.com/)
 ##### 2. Server Key​​ from ​Firebase Console
@@ -21,7 +24,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.6'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.7'
 implementation 'com.google.firebase:firebase-messaging:11.6.2'
 implementation​​ 'com.google.code.gson:gson:2.8.0'
 implementation​​ 'com.firebase:firebase-jobdispatcher:0.8.5'
