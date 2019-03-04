@@ -15,8 +15,8 @@ app should be at least 16 (Jelly Bean) or above.
 ##### 1. Add google-services.json file in app directory of the project.
 ##### 2. Adding dependencies given below in ​ build.gradle file of the project​.​
 ```java
-classpath 'com.google.gms:google-services:3.1.0'
-classpath​ ​'com.android.tools.build:gradle:3.1.3'
+classpath 'com.android.tools.build:gradle:3.3.1'
+classpath 'com.google.gms:google-services:4.2.0'
 ```
 ##### 3. Adding below code in the ​ build.gradle file of the app​​.
 ```java
@@ -24,11 +24,16 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.1.7'
-implementation 'com.google.firebase:firebase-messaging:11.6.2'
-implementation​​ 'com.google.code.gson:gson:2.8.0'
-implementation​​ 'com.firebase:firebase-jobdispatcher:0.8.5'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.0'
+implementation 'com.google.firebase:firebase-messaging:17.3.4'
+implementation 'com.google.code.gson:gson:2.8.0'
+implementation 'com.google.android.gms:play-services-ads:17.1.1'
 ```
+**Note:​​**
+-   One can avoid using **‘com.google.android.gms:play-services-ads’**
+    dependency if an app does not want Smartech to fetch Advertising Id of the device.
+    
+-   If present, remove **‘com.firebase:firebase-jobdispatcher:0.8.5’** dependency from the build.gradle of the app.
 #### To register device for push notifications
 To register the device for receiving push notifications from Smartech panel​,
 add given snippet inside the **onCreate method of the Application class​​**.
@@ -63,8 +68,6 @@ JSONObject payload = new JSONObject();
 try {
 	payload.put("name", "Nexus 5");
 	payload.put("prid", 2);
-	payload.put("price", 15000);
-	payload.put("prqt", 1);
 	jsonObject.put("payload", payload);
 	NetcoreSDK.track(context, "Add To Cart", jsonObject.toString());
 }
@@ -214,5 +217,28 @@ e.g.
 	<category android:name= "android.intent.category.BROWSABLE"/>
 	<data android:scheme = "smartech" android:host= "products"/>
 </intent-filter>
+```
+#### To fetch Advertising Id
+To fetch Advertising Id using Smartech SDK of the device, add given snippet **in the AndroidManifest.xml file inside the application tag**.
+```xml
+<meta-data
+	android:name="SMT_USE_AD_ID"
+	android:value="<value>"/>
+	
+e.g.
+<meta-data
+	android:name="SMT_USE_AD_ID"
+	android:value="1"/>
+```
+**Note​​:** The method accepts either **‘0’** or **‘1’** as value.
+
+- If an app wants Smartech SDK to fetch Advertising Id of the device, use **‘1’** as value.
+
+- If an app does not want Smartech SDK to fetch Advertising Id of the device, use **‘0’** as value.
+#### To fetch custom payload from push notifications
+To fetch custom payload data from the push notifications, **add given snippet in the activity of the application** as per the requirement.
+```java
+Bundle bundle = getIntent().getExtras();
+JSONObject jsonObject = new JSONObject(bundle.getString(“customPayload”));
 ```
 
