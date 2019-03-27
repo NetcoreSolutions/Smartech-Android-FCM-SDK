@@ -24,9 +24,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.0'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.2'
 implementation 'com.google.firebase:firebase-messaging:17.3.4'
-implementation 'com.google.code.gson:gson:2.8.0'
+implementation 'com.google.code.gson:gson:2.8.5'
 implementation 'com.google.android.gms:play-services-ads:17.1.1'
 ```
 **Note:​​**
@@ -181,14 +181,12 @@ NetcoreSDK.clearIdentity(context);
 ```
 #### To set existing FCM token
 To set existing FCM token of the application to the SDK, **add given snippet
-just before ‘register’ method in the Application class of the
-app**.
+as per the requirement**.
 ```java
 NetcoreSDK.setPushToken(context, <token_string>);
 
 e.g.
-NetcoreSDK.setPushToken(context, <token_string>);
-NetcoreSDK.register(this, <app_id>);
+NetcoreSDK.setPushToken(context, "abc...xyz");
 ```
 #### To get GUID of the user
 To obtain GUID of the user from the SDK, add given snippet as per the requirement.
