@@ -253,14 +253,14 @@ implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
 2.  Copy Notification Center files in your project as mentioned below 
 - Paste activity layout and adapter row layout in res > layout folder
-	a. activity_notification_center.xml
-	b. carousal_item.xml
-	c. notification_row.xml
+	- activity_notification_center.xml
+	- carousal_item.xml
+	- notification_row.xml
     
 - Paste activity & adapter classes inside the project
-	a. NotificationCenterActivity.class
-	b. CarousalAdapter.class
-	c. NotificationAdapter.class
+	- NotificationCenterActivity.class
+	- CarousalAdapter.class
+	- NotificationAdapter.class
 
 3. Paste below code in AndroidManifest.xml file of the application
 ```xml
