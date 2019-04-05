@@ -1,3 +1,4 @@
+
 ## [![Netcore Logo](https://netcore.in/wp-content/themes/netcore/img/Netcore-new-Logo.png)](http:www.netcore.in)  FCM SDK For Native Android Apps
 Smartech is a omni channel platform that delivers everything you need to drive mobile engagement and create valuable consumer relationships on mobile. The Smartech android SDK enables your native android app to use all of the features. This guide contains all the information you need to integrate the Smartech Android SDK into your app.
 #### For detailed integration document visit the given [link](https://docs.netcoresmartech.com/docs/android-sdk).
@@ -24,7 +25,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.2'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.3'
 implementation 'com.google.firebase:firebase-messaging:17.3.4'
 implementation 'com.google.code.gson:gson:2.8.5'
 implementation 'com.google.android.gms:play-services-ads:17.1.1'
@@ -240,3 +241,30 @@ Bundle bundle = getIntent().getExtras();
 JSONObject jsonObject = new JSONObject(bundle.getString(“customPayload”));
 ```
 
+#### To use Notification Center feature
+To use Notification Center feature in your app, please follow the steps mentioned below:
+1.  Add given dependencies in the build.gradle file of the app 
+``` java
+implementation 'com.android.support:recyclerview-v7:27.1.0'
+implementation 'com.android.support:cardview-v7:27.1.0'
+implementation 'com.github.bumptech.glide:glide:4.9.0'
+implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+```
+
+2.  Copy Notification Center files in your project as mentioned below 
+- Paste activity layout and adapter row layout in res > layout folder
+	a. activity_notification_center.xml
+	b. carousal_item.xml
+	c. notification_row.xml
+    
+- Paste activity & adapter classes inside the project
+	a. NotificationCenterActivity.class
+	b. CarousalAdapter.class
+	c. NotificationAdapter.class
+
+3. Paste below code in AndroidManifest.xml file of the application
+```xml
+ <activity
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:name=".activity.NotificationCenterActivity" />
+```

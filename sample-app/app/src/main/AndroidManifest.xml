@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.netcore.smartechfcmintegration">
-
+    package="in.netcore.smartechfcmintegration" >
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -48,8 +48,10 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-
-	<meta-data
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".activity.NotificationCenterActivity" />
+	    <meta-data
             android:name="SMT_USE_AD_ID"
             android:value="1"/>
 
@@ -57,4 +59,5 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="<API_KEY>"/>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
