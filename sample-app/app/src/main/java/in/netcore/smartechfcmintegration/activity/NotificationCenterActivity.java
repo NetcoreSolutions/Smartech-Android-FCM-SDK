@@ -19,8 +19,7 @@ import java.util.List;
 
 import in.netcore.smartechfcm.NetcoreSDK;
 import com.smartpradeep.androidhivefcm.activity.NotificationCenterAdapter.NotificationAdapter;
-import in.netcore.smartechfcm.NotificationCenter.Helper.DeleteEventsListener;
-import in.netcore.smartechfcm.NotificationCenter.Model.NotificationList;
+import in.netcore.smartechfcm.notification.*;
 
 public class NotificationCenterActivity extends AppCompatActivity implements DeleteEventsListener, View.OnClickListener {
     private List<String> listDeleteNotifications;

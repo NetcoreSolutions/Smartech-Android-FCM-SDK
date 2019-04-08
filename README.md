@@ -25,7 +25,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.3'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.5'
 implementation 'com.google.firebase:firebase-messaging:17.3.4'
 implementation 'com.google.code.gson:gson:2.8.5'
 implementation 'com.google.android.gms:play-services-ads:17.1.1'
@@ -240,6 +240,12 @@ To fetch custom payload data from the push notifications, **add given snippet in
 Bundle bundle = getIntent().getExtras();
 JSONObject jsonObject = new JSONObject(bundle.getString(“customPayload”));
 ```
+#### To fetch unread push notification count
+To fetch unread push notification count from the NetcoreSDK, add given snippet as per the requirement.
+```java
+int count = NetcoreSDK.getUnreadNotificationsCount(Context context);
+```
+**Note​​:** The method returns the count of unread notifications only that has been received in the application via Smartech SDK. 
 
 #### To use Notification Center feature
 To use Notification Center feature in your app, please follow the steps mentioned below:

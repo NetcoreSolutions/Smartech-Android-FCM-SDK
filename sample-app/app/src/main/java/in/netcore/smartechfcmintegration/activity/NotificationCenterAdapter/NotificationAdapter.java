@@ -34,10 +34,7 @@ import java.util.List;
 import java.util.Locale;
 
 import in.netcore.smartechfcm.NetcoreSDK;
-import in.netcore.smartechfcm.NotificationCenter.Helper.CircleIndicator;
-import in.netcore.smartechfcm.NotificationCenter.Helper.ClickInterface;
-import in.netcore.smartechfcm.NotificationCenter.Helper.DeleteEventsListener;
-import in.netcore.smartechfcm.NotificationCenter.Model.NotificationList;
+import in.netcore.smartechfcm.notification.*;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> implements ClickInterface {
     private static final String dateFormat = "dd MMM yyyy";

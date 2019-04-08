@@ -13,8 +13,7 @@ import com.bumptech.glide.Glide;
 import com.smartpradeep.androidhivefcm.R;
 
 import in.netcore.smartechfcm.NetcoreSDK;
-import in.netcore.smartechfcm.NotificationCenter.Helper.ClickInterface;
-import in.netcore.smartechfcm.NotificationCenter.Model.NotificationList;
+import in.netcore.smartechfcm.notification.*;
 
 public class CarouselAdapter extends PagerAdapter implements View.OnClickListener {
     private NotificationList.NotificationModel notification;
