@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.netcore.smartechfcmintegration" >
+    package="com.smartpradeep.androidhivefcm" >
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -48,16 +48,23 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.CustomActivity"/>
+
         <activity
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".activity.NotificationCenterActivity" />
-	    <meta-data
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="c32731d79af07e4175e09a149a539a7844789f05" />
+
+        <meta-data
             android:name="SMT_USE_AD_ID"
             android:value="1"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="<API_KEY>"/>
+            android:value="ca-app-pub-6483410411418762~8586996255"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

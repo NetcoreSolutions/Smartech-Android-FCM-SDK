@@ -1,1 +1,42 @@
-replace this file with Your FCM generated google-services.json file
+{
+  "project_info": {
+    "project_number": "1032574158867",
+    "firebase_url": "https://readpush-1280.firebaseio.com",
+    "project_id": "readpush-1280",
+    "storage_bucket": "readpush-1280.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032574158867:android:1571ecb1c3098812",
+        "android_client_info": {
+          "package_name": "com.smartpradeep.androidhivefcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032574158867-apf46gbi1bej0m4jopju7l40t3uucjev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf7s5MEZfENdFgrKi5Gd35ArYapuUpERw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

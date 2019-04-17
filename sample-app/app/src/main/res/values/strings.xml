@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FcmSdkIntegration</string>
+    <string name="app_name">Netcore FCM</string>
+    <string name="app_id">Application Id</string>
+    <string name="event_name">Event Name</string>
+    <string name="payload">Payload</string>
+    <string name="submit">Submit</string>
+    <string name="change">Change Token</string>
 </resources>

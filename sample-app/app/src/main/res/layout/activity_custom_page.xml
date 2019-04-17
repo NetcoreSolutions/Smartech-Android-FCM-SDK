@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/layout_default_margin"
+    android:background="@color/colorWhite">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_custom_page_til_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <EditText
+        android:id="@+id/activity_custom_page_et_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/event_name" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/activity_custom_page_tv_payload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/activity_custom_page_til_event_name"
+        android:layout_marginTop="@dimen/layout_default_margin"
+        android:text="@string/payload"
+        android:textColor="@color/colorAccent"/>
+
+    <EditText
+        android:id="@+id/activity_custom_page_et_custom_payload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/activity_custom_page_tv_payload"
+        android:layout_marginTop="@dimen/layout_default_secondary_margin"
+        android:background="@drawable/drawable_et_border"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:gravity="top"
+        android:padding="@dimen/layout_default_margin"/>
+
+    <Button
+        android:id="@+id/activity_custom_page_btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/activity_custom_page_et_custom_payload"
+        android:layout_marginTop="@dimen/layout_default_margin"
+        android:text="@string/submit"/>
+
+    <EditText
+        android:id="@+id/txtToken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/activity_custom_page_btn_submit"
+        android:hint="Token String" />
+
+    <Button
+        android:id="@+id/btn_changeToken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txtToken"
+        android:layout_marginTop="@dimen/layout_default_margin"
+        android:text="@string/change"/>
+</android.support.constraint.ConstraintLayout>

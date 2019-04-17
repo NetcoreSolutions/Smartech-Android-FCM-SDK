@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -34,10 +33,10 @@ import java.util.List;
 import java.util.Locale;
 
 import in.netcore.smartechfcm.NetcoreSDK;
-import in.netcore.smartechfcm.NotificationCenter.Helper.CircleIndicator;
-import in.netcore.smartechfcm.NotificationCenter.Helper.ClickInterface;
-import in.netcore.smartechfcm.NotificationCenter.Helper.DeleteEventsListener;
-import in.netcore.smartechfcm.NotificationCenter.Model.NotificationList;
+import in.netcore.smartechfcm.notification.CircleIndicator;
+import in.netcore.smartechfcm.notification.ClickInterface;
+import in.netcore.smartechfcm.notification.DeleteEventsListener;
+import in.netcore.smartechfcm.notification.NotificationList;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> implements ClickInterface {
     private static final String dateFormat = "dd MMM yyyy";
@@ -316,7 +315,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 NotificationList.NotificationModel notificatonModel = gson.fromJson(msgJsonString, NotificationList.NotificationModel.class);
                 notificationModelList.add(notificatonModel);
             } catch (JSONException e) {
-                e.printStackTrace();
+               e.printStackTrace();
             }
         }
         notifyDataSetChanged();

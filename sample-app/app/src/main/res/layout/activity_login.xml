@@ -106,6 +106,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/logo" />
 
 </RelativeLayout>

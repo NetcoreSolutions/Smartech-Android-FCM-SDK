@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true" />
-            <in.netcore.smartechfcm.NotificationCenter.Helper.CircleIndicator
+            <in.netcore.smartechfcm.notification.CircleIndicator
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
