@@ -26,7 +26,7 @@ apply plugin: 'com.google.gms.google-services'
 #### Adding dependencies in the build.gradle file of the app
 ```java
 implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.7'
-implementation 'com.google.firebase:firebase-messaging:17.3.4'
+implementation 'com.google.firebase:firebase-messaging:17.+'
 implementation 'com.google.code.gson:gson:2.8.5'
 implementation 'com.google.android.gms:play-services-ads:17.1.1'
 ```
@@ -174,6 +174,10 @@ per the requirement.
 ```java
 NetcoreSDK.setIdentity(context, <unique_user_identity>);
 ```
+**Note:** This method sets the identity of the user and should be called in the following cases.
+- Before calling the login event.
+- Inside the condition when the application checks if the user is already logged in.
+
 #### To clear user identity
 In order to wipe out user identity from the SDK, add given snippet as per the
 requirement.
