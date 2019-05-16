@@ -132,6 +132,12 @@ NetcoreSDK.setPushIconColor(context, <argb>);
 
 e.g.
 NetcoreSDK.setPushIconColor(context, Color.RED);
+NetcoreSDK.setPushIconColor(context, ContextCompat.getColor(context, R.color.colorName)); //To apply color from resource file.
+```
+#### To reset push notification icon color (From SDK version 1.2.8)
+To reset color of notification icon add given snippet as per the requirement.  
+  ```java
+NetcoreSDK.resetPushIconColor(context);
 ```
 #### To fetch delivered push notifications
 To fetch delivered push notifications, add given snippet as per the
