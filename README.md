@@ -1,4 +1,5 @@
 
+
 ## [![Netcore Logo](https://netcore.in/wp-content/themes/netcore/img/Netcore-new-Logo.png)](http:www.netcore.in)  FCM SDK For Native Android Apps
 Smartech is a omni channel platform that delivers everything you need to drive mobile engagement and create valuable consumer relationships on mobile. The Smartech android SDK enables your native android app to use all of the features. This guide contains all the information you need to integrate the Smartech Android SDK into your app.
 #### For detailed integration document visit the given [link](https://docs.netcoresmartech.com/docs/android-sdk).
@@ -25,10 +26,10 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.7'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.8'
 implementation 'com.google.firebase:firebase-messaging:17.+'
 implementation 'com.google.code.gson:gson:2.8.5'
-implementation 'com.google.android.gms:play-services-ads:17.1.1'
+implementation 'com.google.android.gms:play-services-ads:17.+'
 ```
 **Note:​​**
 -   One can avoid using **‘com.google.android.gms:play-services-ads’**
@@ -97,17 +98,24 @@ catch (JSONException e) {
 }
 ```
 **Note:** Use attribute name in capital letters as shown above.
-#### To use custom push notification icon
-SDK uses launcher icon for push notifications by default and in order to
-change it, use a custom icon by adding given snippet inside ​**onCreate
-method of the Application class​**.
-```java
-NetcoreSDK.setPushIcon(context, <path_to_drawable_icon>);
 
-e.g. 
-NetcoreSDK.setPushIcon(context, R.drawable.ic_push_icon);
+#### To use custom push notification icon (From SDK version 1.2.8)
+With the launch of Android 5 (Lollipop), the notification icons are rendered differently in the notification bar at the top. By default, Smartech SDK uses the app’s icon for both, the small icon as well as the large icon.
+
+To set a custom notification icon, add the following meta data entry in your AndroidManifest.xml
+```xml
+<meta-data  
+	android:name="SMT_LARGE_NOTIFICATION_ICON"  
+	android:value="<notification_icon_name>"/> 
+	
+<meta-data  
+	android:name="SMT_SMALL_NOTIFICATION_ICON"  
+	android:value="<notification_icon_name>"/>
 ```
-**Note:** The notification icon being used should strictly be in .png format as per
+**Note:**  "**notification_icon_name**" is the name of your file in the drawable directory without the file extension.
+The method **NetcoreSDK.setPushIcon()** is deprecated from SDK version 1.2.8.
+
+The notification icon being used should strictly be in .png format as per
 [Google’s guidelines](https://developer.android.com/guide/practices/ui_guidelines/icon_design_status_bar)​. Preferable size for the push notification icons are
 mentioned below.
 ```c
@@ -116,6 +124,14 @@ drawable-hdpi 		: 	36 x 36
 drawable-xhdpi 		: 	48 x 48
 drawable-xxhdpi 	: 	72 x 72
 drawable-xxxhdpi 	: 	96 x 96
+```
+#### To change push notification icon color (From SDK version 1.2.8)
+To change the color of notification icon, add given snippet inside the **onCreate method of the Application class​​**.
+```java
+NetcoreSDK.setPushIconColor(context, <argb>);
+
+e.g.
+NetcoreSDK.setPushIconColor(context, Color.RED);
 ```
 #### To fetch delivered push notifications
 To fetch delivered push notifications, add given snippet as per the
