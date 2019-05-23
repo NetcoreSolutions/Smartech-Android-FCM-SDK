@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.smartpradeep.androidhivefcm.R;
-
 import in.netcore.smartechfcm.NetcoreSDK;
 import in.netcore.smartechfcm.NotificationCenter.Helper.ClickInterface;
 import in.netcore.smartechfcm.NotificationCenter.Model.NotificationList;

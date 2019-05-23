@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smartpradeep.androidhivefcm" >
+    package="com.smartech.demo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
-        android:allowBackup="false"
-        android:icon="@mipmap/logo"
+        android:name=".SmartechApplication"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-
-        <activity android:name=".activity.ActionActivity" >
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:theme="@style/AppThemeActionBar"
+            android:name=".OtherFunctionsActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:theme="@style/AppThemeActionBar"
+            android:name=".CustomActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:theme="@style/AppThemeActionBar"
+            android:name=".ProfileActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="profile.netcore.com"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.NotificationCenterActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:theme="@style/AppThemeActionBar"
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
@@ -20,51 +50,28 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.InAppActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="inapp.netcore.com"
-                    android:scheme="http" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.LoginActivity" >
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ProfileActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="profile.netcore.com"
-                    android:scheme="http" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.CustomActivity"/>
-
-        <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".activity.NotificationCenterActivity" />
-
         <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="c32731d79af07e4175e09a149a539a7844789f05" />
-
+            android:name="SMT_LARGE_NOTIFICATION_ICON"
+            android:value="logo"/>
         <meta-data
-            android:name="SMT_USE_AD_ID"
-            android:value="1"/>
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6483410411418762~8586996255"/>
+            android:name="SMT_SMALL_NOTIFICATION_ICON"
+            android:value="ic_notif"/>
+        <!--<meta-data-->
+            <!--android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+            <!--android:value="<ad_id>"/>-->
+        <!--<meta-data-->
+            <!--android:name="SMT_USE_AD_ID"-->
+            <!--android:value="<value>"/>-->
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

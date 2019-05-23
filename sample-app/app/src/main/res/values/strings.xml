@@ -1,8 +1,42 @@
 <resources>
-    <string name="app_name">Netcore FCM</string>
-    <string name="app_id">Application Id</string>
-    <string name="event_name">Event Name</string>
-    <string name="payload">Payload</string>
-    <string name="submit">Submit</string>
-    <string name="change">Change Token</string>
+    <string name="app_name">Smartech Demo</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="text_login">Login</string>
+    <string name="text_skip">Skip ></string>
+    <string name="text_hint_email">Enter email</string>
+    <string name="text_hint_password">Enter password</string>
+    <string name="text_hint_mandatory_all_field">Please fill all fields</string>
+    <string name="text_hint_mandatory_field">Please fill all field</string>
+    <string name="text_profile_title">Profile event</string>
+    <string name="text_main_title">Smartech Demo</string>
+    <string name="text_custom_title">Profile event</string>
+    <string name="text_other_function_title">Other Events</string>
+
+    <string name="text_add_to_cart">Add To Cart</string>
+    <string name="text_remove_from_cart">Remove From Cart</string>
+    <string name="text_checkout">Checkout</string>
+    <string name="text_cart_expired">Cart Expired</string>
+    <string name="text_page_browse">Page Browse</string>
+    <string name="text_profile_update">Profile Update</string>
+    <string name="text_opt_in">Opt In</string>
+    <string name="text_opt_out">Opt out</string>
+    <string name="text_custom_data">Custom Data</string>
+    <string name="text_other_function">Other Function</string>
+    <string name="text_get_guid">Get GUID</string>
+    <string name="text_get_notification">Get Notification</string>
+    <string name="text_logout">Logout</string>
+
+
+
+
+
 </resources>

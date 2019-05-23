@@ -1,149 +1,148 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/colorAccent"
-    android:padding="20dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
 
-    <LinearLayout
-        android:id="@+id/login_layout"
-        android:layout_width="fill_parent"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_profile_til_name"
+        android:layout_width="@dimen/margin0"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="1dp"
-            android:text="Profile "
-            android:textSize="25sp"
-            android:textStyle="bold" />
+        android:layout_marginStart="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin16"
+        android:layout_marginEnd="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/inputKey"
-            android:layout_width="fill_parent"
+            android:id="@+id/activity_profile_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="Primary Key"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
+            android:hint="Enter name" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_profile_til_email"
+        android:layout_width="@dimen/margin0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="@+id/activity_profile_til_name"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_til_name"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_til_name">
 
         <EditText
-            android:id="@+id/inputName"
-            android:layout_width="fill_parent"
+            android:id="@+id/activity_profile_email"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="Name"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
+            android:hint="Enter email" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_profile_til_age"
+        android:layout_width="@dimen/margin0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="@+id/activity_profile_til_email"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_til_email"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_til_email">
 
         <EditText
-            android:id="@+id/inoutAge"
-            android:layout_width="fill_parent"
+            android:id="@+id/activity_profile_age"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="Age"
             android:inputType="number"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
+            android:maxLength="3"
+            android:hint="Enter age" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_profile_til_mobile_no"
+        android:layout_width="@dimen/margin0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="@+id/activity_profile_til_age"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_til_age"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_til_age">
 
         <EditText
-            android:id="@+id/inputSalary"
-            android:layout_width="fill_parent"
+            android:id="@+id/activity_profile_mobile_no"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="Salary in Rs."
-            android:inputType="numberDecimal"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
+            android:inputType="number"
+            android:hint="Enter mobile number" />
+    </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/inputEmail"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_profile_til_dob"
+        android:layout_width="@dimen/margin0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="@+id/activity_profile_til_mobile_no"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_til_mobile_no"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_til_mobile_no">
         <EditText
-            android:id="@+id/inputMobile"
-            android:layout_width="fill_parent"
+            android:id="@+id/activity_profile_dob"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="Mobile"
-            android:inputType="phone"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/inputWebsite"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="Website"
-            android:inputType="textUri"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/inoutDOB"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/background_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:hint="DOB"
             android:inputType="date"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="16sp" />
+            android:hint="Enter DOB" />
+    </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="fill_parent"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_profile_til_salary"
+        android:layout_width="@dimen/margin0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="@+id/activity_profile_til_dob"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_til_dob"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_til_dob">
+
+        <EditText
+            android:id="@+id/activity_profile_salary"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@color/colorPrimaryDark"
-            android:padding="3dp"
-            android:text="Save"
-            android:textColor="#fff"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:inputType="number"
+            android:hint="Enter salary" />
+    </android.support.design.widget.TextInputLayout>
 
-</RelativeLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/activity_profile_til_website"
+        android:layout_width="@dimen/margin0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="@+id/activity_profile_til_salary"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_til_salary"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_til_salary">
+
+        <EditText
+            android:id="@+id/activity_profile_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:hint="Enter website" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/activity_profile_btn_save"
+        android:layout_width="@dimen/margin0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        android:text="Save"
+        android:textColor="@color/color_white"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:background="@drawable/button_design"
+        app:layout_constraintEnd_toEndOf="@+id/activity_profile_til_website"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_til_website"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_til_website" />
+
+
+
+</android.support.constraint.ConstraintLayout>
