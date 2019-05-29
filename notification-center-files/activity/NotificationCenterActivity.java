@@ -16,7 +16,6 @@ import com.smartpradeep.androidhivefcm.R;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import in.netcore.smartechfcm.NetcoreSDK;
 import com.smartpradeep.androidhivefcm.activity.NotificationCenterAdapter.NotificationAdapter;
 import in.netcore.smartechfcm.NotificationCenter.Helper.DeleteEventsListener;

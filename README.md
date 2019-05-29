@@ -26,10 +26,10 @@ apply plugin: 'com.google.gms.google-services'
 ```
 #### Adding dependencies in the build.gradle file of the app
 ```java
-implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.8'
-implementation 'com.google.firebase:firebase-messaging:17.+'
+implementation 'in.netcore.smartechfcm:smartech-fcm:1.2.9'
+implementation 'com.google.firebase:firebase-messaging:17.6.0'
 implementation 'com.google.code.gson:gson:2.8.5'
-implementation 'com.google.android.gms:play-services-ads:17.+'
+implementation 'com.google.android.gms:play-services-ads:17.2.0'
 ```
 **Note:​​**
 -   One can avoid using **‘com.google.android.gms:play-services-ads’**
@@ -277,8 +277,8 @@ int count = NetcoreSDK.getUnreadNotificationsCount(Context context);
 To use Notification Center feature in your app, please follow the steps mentioned below:
 1.  Add given dependencies in the build.gradle file of the app 
 ``` java
-implementation 'com.android.support:recyclerview-v7:27.1.0'
-implementation 'com.android.support:cardview-v7:27.1.0'
+implementation 'com.android.support:recyclerview-v7:28.0.0'
+implementation 'com.android.support:cardview-v7:28.0.0'
 implementation 'com.github.bumptech.glide:glide:4.9.0'
 implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 ```
