@@ -1,4 +1,4 @@
-package com.smartpradeep.androidhivefcm.activity.NotificationCenterAdapter;
+package com.smartech.nativedemo.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.smartpradeep.androidhivefcm.R;
+
+import com.smartech.nativedemo.R;
+import com.smartech.nativedemo.Utils.Netcore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,11 +35,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import in.netcore.smartechfcm.NetcoreSDK;
-import in.netcore.smartechfcm.NotificationCenter.Helper.CircleIndicator;
-import in.netcore.smartechfcm.NotificationCenter.Helper.ClickInterface;
-import in.netcore.smartechfcm.NotificationCenter.Helper.DeleteEventsListener;
-import in.netcore.smartechfcm.NotificationCenter.Model.NotificationList;
+import in.netcore.smartechfcm.notification.CircleIndicator;
+import in.netcore.smartechfcm.notification.ClickInterface;
+import in.netcore.smartechfcm.notification.DeleteEventsListener;
+import in.netcore.smartechfcm.notification.NotificationList;
+
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> implements ClickInterface {
     private static final String dateFormat = "dd MMM yyyy";
@@ -47,7 +49,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private static final String text_read_more = "Read more...";
     private static final String text_read = "read";
     private static final String text_unread = "unread";
-    private static final int color_white = Color.parseColor("#FFFFFF");
+    private static final int colorWhite = Color.parseColor("#FFFFFF");
     private static final int color_white_selected = Color.parseColor("#DDDDDD");
     private Context mContext;
     private List<NotificationList> notificationList;
@@ -165,7 +167,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             selectedItemPosition = -1;
         }
         if (position == deselectedItemPosition) {
-            holder.cardView.setCardBackgroundColor(color_white);
+            holder.cardView.setCardBackgroundColor(colorWhite);
             deselectedItemPosition = -1;
         }
 
@@ -174,10 +176,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View v) {
                 setNotificationStatus(holder.textTitle, position);
 
-                //Toast.makeText(mContext,notificationModel.getCustomPayload().toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,notificationModel.getCustomPayload().toString(),Toast.LENGTH_LONG).show();
                 if (selectedFlag) {
                     if (notificationModel.isSelected()) {
-                        holder.cardView.setCardBackgroundColor(color_white);
+                        holder.cardView.setCardBackgroundColor(colorWhite);
                         removeSelectedItem(notificationModel);
                     } else {
                         holder.cardView.setCardBackgroundColor(color_white_selected);
@@ -187,7 +189,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 } else {
                     if (!notificationModel.getDeeplink().trim().equals("") && notificationModel.getDeeplink() != null) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(notificationModel.getDeeplink()));
-                        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(browserIntent);
                     }
                 }
@@ -249,7 +251,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         String notificationStatus = notificationList.get(pos).getStatus();
 
         if (notificationStatus.equals(text_unread)) {
-            NetcoreSDK.markNotificationAsRead(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink());
+            Netcore.markNotificationAsRead(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink());
             notificationStatus = text_read;
             notificationList.get(pos).setStatus(notificationStatus);
         }
@@ -301,7 +303,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View v) {
                 setNotificationStatus(tvTitle, position);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, actionButtonUri);
-                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(browserIntent);
             }
         });
@@ -408,3 +410,4 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
     }
 }
+

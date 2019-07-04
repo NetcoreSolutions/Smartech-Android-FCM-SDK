@@ -1,4 +1,4 @@
-package com.smartpradeep.androidhivefcm.activity;
+package com.smartech.nativedemo.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,14 +12,16 @@ import android.view.View;
 import android.widget.ImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.smartpradeep.androidhivefcm.R;
+import com.smartech.nativedemo.Adapter.NotificationAdapter;
+import com.smartech.nativedemo.MainActivity;
+import com.smartech.nativedemo.R;
+import com.smartech.nativedemo.Utils.Netcore;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import in.netcore.smartechfcm.NetcoreSDK;
-import com.smartpradeep.androidhivefcm.activity.NotificationCenterAdapter.NotificationAdapter;
-import in.netcore.smartechfcm.NotificationCenter.Helper.DeleteEventsListener;
-import in.netcore.smartechfcm.NotificationCenter.Model.NotificationList;
+import in.netcore.smartechfcm.notification.DeleteEventsListener;
+import in.netcore.smartechfcm.notification.NotificationList;
 
 public class NotificationCenterActivity extends AppCompatActivity implements DeleteEventsListener, View.OnClickListener {
     private List<String> listDeleteNotifications;
@@ -42,10 +44,14 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         listDeleteNotifications = new ArrayList<>();
 
         handleNotificationData();
+        activityNotificationToolbar.setTitle("Notification Manager");
+        activityNotificationToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+        activityNotificationToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
 
         setSupportActionBar(activityNotificationToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+     /*   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
+
 
         actvityNotificationDeleteIcon.setOnClickListener(this);
     }
@@ -59,7 +65,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        NetcoreSDK.deleteNotification(getApplicationContext(), listDeleteNotifications);
+                        Netcore.deleteNotification(getApplicationContext(), listDeleteNotifications);
                         handleNotificationData();
                         actvityNotificationDeleteIcon.setVisibility(View.GONE);
                     }
@@ -71,7 +77,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
     //handle notification data
     private void handleNotificationData() {
         Type listType = new TypeToken<List<NotificationList>>() {}.getType();
-        List<NotificationList> notificationList = gson.fromJson(NetcoreSDK.getNotifications(getApplicationContext(),10).toString(), listType);
+        List<NotificationList> notificationList = gson.fromJson(Netcore.getNotifications(getApplicationContext(),100).toString(), listType);
         if( notificationList.size()<=0){
             //notificationList.clear();
             notificationRecycler.setVisibility(View.GONE);
@@ -89,8 +95,8 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         }
         NotificationAdapter mAdapter = new NotificationAdapter(getApplicationContext(), notificationModelList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        notificationRecycler.setLayoutManager(mLayoutManager);
-        notificationRecycler.setAdapter(mAdapter);
+       notificationRecycler.setLayoutManager(mLayoutManager);
+       notificationRecycler.setAdapter(mAdapter);
 
     }
 
@@ -102,7 +108,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
 
     @Override
     public boolean onSupportNavigateUp() {
-        startActivity(new Intent(NotificationCenterActivity.this, ActionActivity.class));
+        startActivity(new Intent(NotificationCenterActivity.this, MainActivity.class));
         finish();
         return true;
     }
@@ -126,3 +132,4 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         }
     }
 }
+

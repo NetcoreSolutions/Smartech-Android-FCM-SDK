@@ -189,6 +189,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 } else {
                     if (!notificationModel.getDeeplink().trim().equals("") && notificationModel.getDeeplink() != null) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(notificationModel.getDeeplink()));
+			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(browserIntent);
                     }
                 }
@@ -302,6 +303,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View v) {
                 setNotificationStatus(tvTitle, position);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, actionButtonUri);
+		browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(browserIntent);
             }
         });
