@@ -69,6 +69,7 @@
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
+
         <TextView
             android:id="@+id/text_message"
             android:layout_width="0dp"
