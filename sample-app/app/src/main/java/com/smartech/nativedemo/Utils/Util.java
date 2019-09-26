@@ -1,4 +1,4 @@
-package com.smartech.demo.Utils;
+package com.smartech.nativedemo.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,9 +7,11 @@ import android.support.v7.app.AlertDialog;
 
 import androidx.annotation.Nullable;
 
-import com.smartech.demo.R;
+import com.smartech.nativedemo.R;
 
 public class Util {
+    public static final String NC_DEEP_LINK = "deeplink";
+    public static final String NC_CUSTOM_PAYLOAD = "customPayload";
    public static void showAlert(final Context context, final int flag, String title, String message){
 
        new AlertDialog.Builder(context)

@@ -1,4 +1,4 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -39,8 +39,9 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.smartech.demo.Utils.Netcore;
-import com.smartech.demo.Utils.Util;
+import com.smartech.nativedemo.Utils.Netcore;
+import com.smartech.nativedemo.Utils.SharedPreferencesManager;
+import com.smartech.nativedemo.Utils.Util;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -55,8 +56,8 @@ public class OtherFunctionsActivity extends AppCompatActivity implements View.On
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 5000;
     private static final int REQUEST_CHECK_SETTINGS = 100;
     public static int MY_PERMISSIONS_REQUEST_FOR_LOCATION = 0;
-    private Button btnSetToken, btnSetLocation, btnGetToken, btnCurrentLocation, btnClearId;
-    private EditText etLattitude, etLongitude, etSetToken;
+    private Button btnSetToken, btnSetLocation, btnGetToken, btnCurrentLocation, btnClearId, btnAppId;
+    private EditText etLattitude, etLongitude, etSetToken, etappId;
     // location last updated time
     private String mLastUpdateTime;
     // bunch of location related apis
@@ -77,20 +78,28 @@ public class OtherFunctionsActivity extends AppCompatActivity implements View.On
         etLattitude = findViewById(R.id.activity_other_function_et_lattitude);
         etLongitude = findViewById(R.id.activity_other_function_et_longitude);
         etSetToken = findViewById(R.id.activity_other_function_et_set_token);
+        etappId = findViewById(R.id.activity_other_function_et_appid);
+
         btnSetLocation = findViewById(R.id.activity_other_function_btn_set_location);
+        btnSetLocation.setOnClickListener(this);
+
         btnSetToken = findViewById(R.id.activity_other_function_btn_set_token);
+        btnSetToken.setOnClickListener(this);
+
         btnGetToken = findViewById(R.id.activity_other_function_btn_get_token);
+        btnGetToken.setOnClickListener(this);
+
         btnClearId = findViewById(R.id.activity_other_function_clear_id);
+        btnClearId.setOnClickListener(this);
+
         btnCurrentLocation = findViewById(R.id.btn_current_location);
         btnCurrentLocation.setOnClickListener(this);
-        btnSetToken.setOnClickListener(this);
-        btnSetLocation.setOnClickListener(this);
-        btnGetToken.setOnClickListener(this);
-        btnClearId.setOnClickListener(this);
-        init();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        btnAppId = findViewById(R.id.activity_other_function_change_app_id);
+        btnAppId.setOnClickListener(this);
+
+        //init();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
             actionBar.setTitle(getResources().getText(R.string.text_other_function_title));
@@ -218,15 +227,23 @@ public class OtherFunctionsActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.btn_current_location:
 
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FOR_LOCATION);
+//                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//                        != PackageManager.PERMISSION_GRANTED) {
+//
+//                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FOR_LOCATION);
+//
+//                } else {
+//                    startLocationUpdates();
+//                }
+                break;
+            case R.id.activity_other_function_change_app_id:
+                if (!etappId.getText().toString().trim().isEmpty() && etappId.getText().toString().length() == 32) {
+                    SharedPreferencesManager.getInstance(OtherFunctionsActivity.this).setSmartechId(etappId.getText().toString());
+                    Util.showAlertWithMessage(OtherFunctionsActivity.this, getResources().getText(R.string.alert_title_appid).toString(), getResources().getText(R.string.alert_message_appid).toString());
 
                 } else {
-                    startLocationUpdates();
+                    Toast.makeText(this, getResources().getText(R.string.text_hint_mandatory_field), Toast.LENGTH_SHORT).show();
                 }
-
                 break;
         }
     }

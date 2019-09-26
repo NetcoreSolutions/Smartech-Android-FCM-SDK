@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin8">
+    android:layout_margin="@dimen/widget_margin_small">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/activity_custom_page_til_event_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin8"
-        android:layout_marginTop="@dimen/margin16"
-        android:layout_marginEnd="@dimen/margin8"
+        android:layout_marginStart="@dimen/widget_margin_small"
+        android:layout_marginTop="@dimen/widget_margin_medium"
+        android:layout_marginEnd="@dimen/widget_margin_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,9 +28,9 @@
         android:id="@+id/activity_custom_page_tv_payload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin8"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginEnd="@dimen/margin8"
+        android:layout_marginStart="@dimen/widget_margin_small"
+        android:layout_marginTop="@dimen/widget_margin_small"
+        android:layout_marginEnd="@dimen/widget_margin_small"
         android:text="payload"
         app:layout_constraintEnd_toEndOf="@+id/activity_custom_page_til_event_name"
         app:layout_constraintStart_toStartOf="@+id/activity_custom_page_til_event_name"
@@ -40,13 +40,13 @@
         android:id="@+id/activity_custom_page_et_custom_payload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin8"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginEnd="@dimen/margin8"
+        android:layout_margin="@dimen/widget_margin_small"
+        android:layout_marginTop="@dimen/widget_margin_small"
+        android:layout_marginEnd="@dimen/widget_margin_small"
         android:background="@drawable/drawable_et_border"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:lines="5"
+        android:lines="15"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="@+id/activity_custom_page_tv_payload"
         app:layout_constraintStart_toStartOf="@+id/activity_custom_page_tv_payload"
@@ -56,14 +56,14 @@
         android:id="@+id/activity_custom_page_btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin8"
-        android:layout_marginTop="@dimen/margin8"
+        android:layout_margin="@dimen/widget_margin_small"
+        android:layout_marginTop="@dimen/widget_margin_small"
         android:text="submit"
-        android:textColor="@color/color_white"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:textAllCaps="false"
         android:background="@drawable/button_design"
         app:layout_constraintEnd_toEndOf="@+id/activity_custom_page_et_custom_payload"
         app:layout_constraintStart_toStartOf="@+id/activity_custom_page_et_custom_payload"
         app:layout_constraintTop_toBottomOf="@id/activity_custom_page_et_custom_payload" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

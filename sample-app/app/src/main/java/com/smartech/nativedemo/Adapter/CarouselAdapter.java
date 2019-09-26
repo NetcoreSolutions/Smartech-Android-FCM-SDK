@@ -1,4 +1,4 @@
-package com.smartech.demo.Adapter;
+package com.smartech.nativedemo.Adapter;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import com.smartech.demo.R;
-import com.smartech.demo.Utils.Netcore;
+import com.smartech.nativedemo.R;
+import com.smartech.nativedemo.Utils.Netcore;
 
 import androidx.annotation.NonNull;
 import in.netcore.smartechfcm.notification.ClickInterface;

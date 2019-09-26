@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +9,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/notification_recycler"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero_margin"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/activity_notification_toolbar"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
@@ -29,11 +29,11 @@
 
             <ImageView
                 android:id="@+id/actvity_notification_delete_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:visibility="gone"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:visibility="visible"
                 android:layout_gravity="end"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="@dimen/widget_margin_small"
                 android:src="@drawable/delete_button"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true" />
@@ -41,12 +41,12 @@
 
     <ImageView
         android:id="@+id/activity_notification_ceneter_placeholder"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="@dimen/zero_margin"
+        android:layout_height="@dimen/zero_margin"
+        android:layout_marginStart="@dimen/widget_margin_medium"
+        android:layout_marginTop="@dimen/widget_margin_small"
+        android:layout_marginEnd="@dimen/widget_margin_medium"
+        android:layout_marginBottom="@dimen/widget_margin_small"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,4 +55,4 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_notification_toolbar"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/smartech_nc_empty" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,17 @@
-package com.smartech.demo.Adapter;
+package com.smartech.nativedemo.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +24,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
-import com.smartech.demo.R;
-import com.smartech.demo.Utils.Netcore;
+import com.smartech.nativedemo.R;
+import com.smartech.nativedemo.Utils.Netcore;
+import com.smartech.nativedemo.Utils.Util;
 
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -49,7 +52,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private static final String text_read_more = "Read more...";
     private static final String text_read = "read";
     private static final String text_unread = "unread";
-    private static final int color_white = Color.parseColor("#FFFFFF");
+    private static final int colorWhite = Color.parseColor("#FFFFFF");
     private static final int color_white_selected = Color.parseColor("#DDDDDD");
     private Context mContext;
     private List<NotificationList> notificationList;
@@ -62,6 +65,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private CarouselAdapter carouselAdapter;
     private int selectedItemPosition = -1;
     private int deselectedItemPosition = -1;
+    public static final String TAG = NotificationAdapter.class.getSimpleName();
 
     public NotificationAdapter(Context context, List<NotificationList> notificationList, DeleteEventsListener deleteEventsListener) {
         notificationModelList = new ArrayList<>();
@@ -103,7 +107,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         int showActionButtonLayout = notificationModel.getActionButton().size() != 0
                 && notificationModel.getActionButton() != null ? View.VISIBLE : View.GONE;
         holder.dividerview.setVisibility(showActionButtonLayout);
-        if(showActionButtonLayout == View.VISIBLE){
+        if (showActionButtonLayout == View.VISIBLE) {
             for (int i = 0; i < notificationModel.getActionButton().size(); i++) {
                 handleActions(holder, notificationModel, i, position);
             }
@@ -132,7 +136,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             holder.mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
-                public void onPageScrolled(int i, float v, int i1) {}
+                public void onPageScrolled(int i, float v, int i1) {
+                }
 
                 @Override
                 public void onPageSelected(int i) {
@@ -150,7 +155,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 }
 
                 @Override
-                public void onPageScrollStateChanged(int i) {}
+                public void onPageScrollStateChanged(int i) {
+                }
             });
         }
 
@@ -167,7 +173,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             selectedItemPosition = -1;
         }
         if (position == deselectedItemPosition) {
-            holder.cardView.setCardBackgroundColor(color_white);
+            holder.cardView.setCardBackgroundColor(colorWhite);
             deselectedItemPosition = -1;
         }
 
@@ -176,20 +182,26 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View v) {
                 setNotificationStatus(holder.textTitle, position);
 
-                Toast.makeText(mContext,notificationModel.getCustomPayload().toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, notificationModel.getCustomPayload().toString(), Toast.LENGTH_LONG).show();
                 if (selectedFlag) {
                     if (notificationModel.isSelected()) {
-                        holder.cardView.setCardBackgroundColor(color_white);
+                        holder.cardView.setCardBackgroundColor(colorWhite);
                         removeSelectedItem(notificationModel);
                     } else {
                         holder.cardView.setCardBackgroundColor(color_white_selected);
-                      addSelectedItem(notificationModel);
+                        addSelectedItem(notificationModel);
 
                     }
                 } else {
                     if (!notificationModel.getDeeplink().trim().equals("") && notificationModel.getDeeplink() != null) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(notificationModel.getDeeplink()));
-			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Util.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
+                        bundle.putString(Util.NC_DEEP_LINK, notificationModel.getDeeplink());
+                        browserIntent.putExtras(bundle);
+
                         mContext.startActivity(browserIntent);
                     }
                 }
@@ -275,27 +287,27 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     }
 
-    private void handleActions(final NotificationViewHolder viewHolder, final NotificationList.NotificationModel notificationModel, final int index, final int position){
+    private void handleActions(final NotificationViewHolder viewHolder, final NotificationList.NotificationModel notificationModel, final int index, final int position) {
         String actionButtonText = notificationModel.getActionButton().get(index).getActionName();
         Uri actionButtonUri = Uri.parse(notificationModel.getActionButton().get(index).getActionDeeplink());
-
-        switch (index){
+        String customPayload = notificationModel.getCustomPayload().toString();
+        switch (index) {
             case 0:
-                setUpActionButton(viewHolder.btnActionOne, viewHolder.textTitle, actionButtonText, actionButtonUri, position);
+                setUpActionButton(viewHolder.btnActionOne, viewHolder.textTitle, actionButtonText, actionButtonUri, position, customPayload);
                 break;
 
             case 1:
-                setUpActionButton(viewHolder.btnActionTwo, viewHolder.textTitle, actionButtonText, actionButtonUri, position);
+                setUpActionButton(viewHolder.btnActionTwo, viewHolder.textTitle, actionButtonText, actionButtonUri, position, customPayload);
                 break;
 
             case 2:
-                setUpActionButton(viewHolder.btnActionThree, viewHolder.textTitle, actionButtonText, actionButtonUri, position);
+                setUpActionButton(viewHolder.btnActionThree, viewHolder.textTitle, actionButtonText, actionButtonUri, position, customPayload);
                 break;
         }
     }
 
     private void setUpActionButton(Button btnAction, final TextView tvTitle, final String actionText,
-                                   final Uri actionButtonUri, final int position){
+                                   final Uri actionButtonUri, final int position, final String customPayload) {
         btnAction.setVisibility(View.VISIBLE);
         btnAction.setText(actionText);
         btnAction.setOnClickListener(new View.OnClickListener() {
@@ -303,7 +315,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View v) {
                 setNotificationStatus(tvTitle, position);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, actionButtonUri);
-		browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                Bundle bundle = new Bundle();
+                bundle.putString(Util.NC_CUSTOM_PAYLOAD, actionButtonUri.toString());
+                bundle.putString(Util.NC_DEEP_LINK, customPayload);
+                browserIntent.putExtras(bundle);
+
                 mContext.startActivity(browserIntent);
             }
         });
@@ -317,9 +335,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 String msgJsonString = jsonObjectNotification.getString("data");
                 NotificationList.NotificationModel notificatonModel = gson.fromJson(msgJsonString, NotificationList.NotificationModel.class);
                 notificationModelList.add(notificatonModel);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (Exception e){
+                Log.e(TAG, "Error: "+ e.getMessage());
+        }
         }
         notifyDataSetChanged();
     }
@@ -348,8 +366,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 deselectedItemPosition = notificationPosition;
                 deleteListener.showDeleteAction(selectedFlag);
                 notifyItemChanged(notificationPosition);
-            }
-            else {
+            } else {
                 addSelectedItem(notificationModel);
                 selectedItemPosition = notificationPosition;
                 notifyItemChanged(notificationPosition);
@@ -359,10 +376,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 selectedFlag = false;
                 deleteListener.showDeleteAction(selectedFlag);
             }
-        }
-        else {
+        } else {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, deepLink);
             browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            Bundle bundle = new Bundle();
+            bundle.putString(Util.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
+            bundle.putString(Util.NC_DEEP_LINK, notificationModel.getDeeplink());
+            browserIntent.putExtras(bundle);
+
             mContext.startActivity(browserIntent);
         }
     }
@@ -383,7 +405,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         private ImageView imgNotification;
         private TextView textTitle, textMessage, textDate, text_carousal_message, text_carousal_title;
         private Button btnActionOne, btnActionTwo, btnActionThree, btnKnowMore;
-        private View dividerview,carousalDividerView;
+        private View dividerview, carousalDividerView;
         private ViewPager mPager;
         private CircleIndicator indicator;
         private RelativeLayout layoutCarousel;
@@ -406,7 +428,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             cardView = itemView.findViewById(R.id.card);
             text_carousal_message = itemView.findViewById(R.id.notification_row_carousal_message);
             text_carousal_title = itemView.findViewById(R.id.notification_row_carousal_title);
-            carousalDividerView=itemView.findViewById(R.id.carosal_divider_view);
+            carousalDividerView = itemView.findViewById(R.id.carosal_divider_view);
         }
     }
 }

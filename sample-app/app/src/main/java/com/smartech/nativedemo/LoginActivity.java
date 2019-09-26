@@ -1,7 +1,8 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.smartech.demo.Utils.Netcore;
-import com.smartech.demo.Utils.SharedPreferencesManager;
+import com.smartech.nativedemo.Utils.Netcore;
+import com.smartech.nativedemo.Utils.SharedPreferencesManager;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,10 +40,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (bundle != null)
                 for (String key : bundle.keySet()) {
                     Log.e(TAG, key + " : " + bundle.get(key).toString());
-                    Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
+                    if(key.equals("deeplink")){
+                        Uri uri = Uri.parse(bundle.get(key).toString());
+                        String keyValue = uri.getQueryParameter("param1");
+                        Log.e(TAG, "onCreate: "+keyValue);
+                    }
+                    if (key.equals("customPayload")) {
+                        Log.e(TAG, key + " : " + bundle.get(key).toString());
+                        Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
+                    }
                 }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e){
+            Log.e(TAG, "Error: "+ e.getMessage());
         }
 
         btnLogin.setOnClickListener(this);

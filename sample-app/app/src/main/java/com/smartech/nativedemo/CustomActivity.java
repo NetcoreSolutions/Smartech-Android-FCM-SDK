@@ -1,4 +1,4 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
@@ -9,12 +9,46 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.smartech.demo.Utils.Netcore;
+import com.smartech.nativedemo.Utils.Netcore;
 
 public class CustomActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText etEventName,etPayload;
     private Button btnSubmit;
-
+    private String payload = "{\n" +
+            "    \"payload\": {\n" +
+            "        \"company_name\": \"Apple\",\n" +
+            "        \"prid\": 12,\n" +
+            "        \"product_name\": \"iPhone\",\n" +
+            "        \"product_price\": 999.99,\n" +
+            "        \"product_quantity\": 2,\n" +
+            "        \"prqt\": 2,\n" +
+            "        \"user_id\": 10,\n" +
+            "        \"country\": [\"india\", \"aus\", \"us\"],\n" +
+            "        \"countrycode\": [91, 92, 140],\n" +
+            "        \"countrygdp\": [91, 92.5, 14.278],\n" +
+            "        \"items\": [{\n" +
+            "            \"company_name\": \"Apple\",\n" +
+            "            \"prid\": 12,\n" +
+            "            \"product_name\": \"iPhone\",\n" +
+            "            \"product_price\": 50001,\n" +
+            "            \"product_quantity\": 2,\n" +
+            "            \"prqt\": 2,\n" +
+            "            \"user_id\": 10\n" +
+            "        }, {\n" +
+            "            \"company_name\": \"Apple\",\n" +
+            "            \"prid\": 123,\n" +
+            "            \"product_name\": \"iPhone X\",\n" +
+            "            \"product_price\": 49999,\n" +
+            "            \"product_quantity\": 1,\n" +
+            "            \"prqt\": 1,\n" +
+            "            \"user_id\": 10\n" +
+            "        }],\n" +
+            "        \"product\": {\n" +
+            "            \"product_name\": \"apple\",\n" +
+            "            \"prid\": 100\n" +
+            "        }\n" +
+            "    }\n" +
+            "}\n}";
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -24,9 +58,9 @@ public class CustomActivity extends AppCompatActivity implements View.OnClickLis
         etPayload =  findViewById(R.id.activity_custom_page_et_custom_payload);
         btnSubmit = findViewById(R.id.activity_custom_page_btn_submit);
 
-        etEventName.setText("Add To Cart");
+        etEventName.setText("event1");
         etEventName.setSelection(etEventName.getText().toString().trim().length());
-        etPayload.setText("{\"payload\":{\"name\":\"Nexus 5\",\"prid\":2,\"price\":15000,\"prqt\":1}}");
+        etPayload.setText(payload);
 
         btnSubmit.setOnClickListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

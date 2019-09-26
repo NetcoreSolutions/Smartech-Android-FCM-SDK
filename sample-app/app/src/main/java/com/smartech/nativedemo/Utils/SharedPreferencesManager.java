@@ -1,4 +1,4 @@
-package com.smartech.demo.Utils;
+package com.smartech.nativedemo.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 public class SharedPreferencesManager {
 
     public static final String STATUS_LOGIN = "login";
-
+    public static final String SMARTECH_ID = "smartech_id";
     private static SharedPreferencesManager sharePref = new SharedPreferencesManager();
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
@@ -27,6 +27,14 @@ public class SharedPreferencesManager {
 
     public  void setLoginValue(String newValue) {
         editor.putString(STATUS_LOGIN , newValue);
+        editor.apply();
+    }
+    public  String getSmartechId() {
+        return sharedPreferences.getString(SMARTECH_ID , Netcore.APPID);
+    }
+
+    public  void setSmartechId(String appid) {
+        editor.putString(SMARTECH_ID , appid);
         editor.apply();
     }
 

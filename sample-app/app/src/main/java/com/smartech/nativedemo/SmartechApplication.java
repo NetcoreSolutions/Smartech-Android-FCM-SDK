@@ -1,8 +1,10 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
 import android.app.Application;
 import android.graphics.Color;
-import com.smartech.demo.Utils.Netcore;
+
+import com.smartech.nativedemo.Utils.Netcore;
+
 import in.netcore.smartechfcm.NetcoreSDK;
 
 public class SmartechApplication extends Application {

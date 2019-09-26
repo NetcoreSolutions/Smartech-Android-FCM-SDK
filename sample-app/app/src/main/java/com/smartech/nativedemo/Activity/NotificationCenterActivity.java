@@ -1,4 +1,4 @@
-package com.smartech.demo.Activity;
+package com.smartech.nativedemo.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,10 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.smartech.demo.Adapter.NotificationAdapter;
-import com.smartech.demo.MainActivity;
-import com.smartech.demo.R;
-import com.smartech.demo.Utils.Netcore;
+import com.smartech.nativedemo.Adapter.NotificationAdapter;
+import com.smartech.nativedemo.MainActivity;
+import com.smartech.nativedemo.R;
+import com.smartech.nativedemo.Utils.Netcore;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -45,8 +45,9 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
 
         handleNotificationData();
         activityNotificationToolbar.setTitle("Notification Manager");
-        activityNotificationToolbar.setTitleTextColor(getResources().getColor(R.color.color_white));
+        activityNotificationToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         activityNotificationToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
+        activityNotificationToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         setSupportActionBar(activityNotificationToolbar);
      /*   getSupportActionBar().setDisplayHomeAsUpEnabled(true);

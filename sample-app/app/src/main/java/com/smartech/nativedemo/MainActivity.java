@@ -1,11 +1,20 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
+import android.os.LocaleList;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -13,17 +22,20 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.WorkManager;
+
 import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
-import com.smartech.demo.Activity.NotificationCenterActivity;
-import com.smartech.demo.Utils.Netcore;
-import com.smartech.demo.Utils.SharedPreferencesManager;
-import com.smartech.demo.Utils.Util;
+import com.smartech.nativedemo.Activity.NotificationCenterActivity;
+import com.smartech.nativedemo.Utils.Netcore;
+import com.smartech.nativedemo.Utils.SharedPreferencesManager;
+import com.smartech.nativedemo.Utils.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     String TAG = "LoginActivity";
@@ -34,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
     public static final int OPT_IN = 1;
     public static final int OPT_OUT = 2;
     Switch switchEvent;
-    boolean eventflag=false;
-    public static final int    PAGE_BROWSE      = 1;
-    public static final int    ADD_TO_CART      = 2;
-    public static final int    CHECKOUT         = 3;
-    public static final int    CART_EXPIRY      = 4;
-    public static final int    REMOVE_FROM_CART = 5;
+    boolean eventflag = false;
+    public static final int PAGE_BROWSE = 1;
+    public static final int ADD_TO_CART = 2;
+    public static final int CHECKOUT = 3;
+    public static final int CART_EXPIRY = 4;
+    public static final int REMOVE_FROM_CART = 5;
 
 
     @Override
@@ -60,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         btnGuid = findViewById(R.id.btn_guid);
         btnGetNotification = findViewById(R.id.btn_get_notification);
         btnLogout = findViewById(R.id.btn_logout);
-        switchEvent=findViewById(R.id.switch_event);
+        switchEvent = findViewById(R.id.switch_event);
 
         btnAddCart.setOnClickListener(onClick);
         btnRemoveCart.setOnClickListener(onClick);
@@ -75,37 +87,52 @@ public class MainActivity extends AppCompatActivity {
         btnGuid.setOnClickListener(onClick);
         btnGetNotification.setOnClickListener(onClick);
         btnLogout.setOnClickListener(onClick);
-        textNotificationCount=findViewById(R.id.text_notification_count);
+        textNotificationCount = findViewById(R.id.text_notification_count);
 
         switchEvent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               eventflag=isChecked;
-                Log.d(TAG, "onCheckedChanged: "+eventflag);
+                eventflag = isChecked;
+                Log.d(TAG, "onCheckedChanged: " + eventflag);
             }
         });
 
         String status = SharedPreferencesManager.getInstance(getApplicationContext()).getLoginValue();
         if (status == null || !status.equals(SharedPreferencesManager.STATUS_LOGIN)) {
 
-               btnLogout.setVisibility(View.GONE);
+            btnLogout.setVisibility(View.GONE);
 
         }
-         actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
 
         if (actionBar != null) {
             actionBar.setTitle(getResources().getText(R.string.text_main_title));
         }
 
-
+        TextView txtCustomPayload = findViewById(R.id.txtCustomPayload);
+        TextView txtDeeplink = findViewById(R.id.txtDeeplink);
         try {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null)
                 for (String key : bundle.keySet()) {
                     Log.e(TAG, key + " : " + bundle.get(key).toString());
-                    Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
+                    if (key.equals("customPayload")) {
+                        String data = key + " : " + bundle.get(key).toString();
+                        txtCustomPayload.setText(data);
+                        Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
+                    }
+                    if(key.equals("deeplink")){
+                        String data = key + " : " + bundle.get(key).toString();
+                        txtDeeplink.setText(data);
+                        Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
+
+                        Uri uri = Uri.parse(bundle.get(key).toString());
+                        String keyValue = uri.getQueryParameter("param1");
+
+                        //Toast.makeText(this,  "param1 : " + keyValue, Toast.LENGTH_LONG).show();
+                    }
                 }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e){
+            Log.e(TAG, "Error: "+ e.getMessage());
         }
     }
 
@@ -115,16 +142,16 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle(getResources().getText(R.string.text_main_title));
         }
-        if(btnGetNotification!=null) {
+        if (btnGetNotification != null) {
             if (Build.VERSION.SDK_INT >= 21) {
-                textNotificationCount.setText(""+Netcore.getUnreadNotificationsCount(this));
+                textNotificationCount.setText("" + Netcore.getUnreadNotificationsCount(this));
                 btnGetNotification.setText("Notification center");
             } else {
                 btnGetNotification.setText("Notification center - unread(" + Netcore.getUnreadNotificationsCount(this) + ")");
             }
 
         }
-        }
+    }
 
     View.OnClickListener onClick = new View.OnClickListener() {
         @Override
@@ -151,47 +178,51 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_cart_expired:
                     if (!eventflag) {
                         trackEventFunc(getResources().getString(R.string.text_cart_expired));
-                    }else {trackEventFunc(CART_EXPIRY);}
+                    } else {
+                        trackEventFunc(CART_EXPIRY);
+                    }
                     break;
 
                 case R.id.btn_page_browse:
                     if (!eventflag) {
                         trackEventFunc(getResources().getString(R.string.text_page_browse));
-                    }else {trackEventFunc(PAGE_BROWSE);}
+                    } else {
+                        trackEventFunc(PAGE_BROWSE);
+                    }
                     break;
 
                 case R.id.btn_profile_update:
-                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                     break;
 
                 case R.id.btn_opt_in:
-                        Util.showAlert(getApplicationContext(), OPT_IN, "Smartech Demo", "Do you want to Opt in?");
+                    Util.showAlert(MainActivity.this, OPT_IN, "Smartech Demo", "Do you want to Opt in?");
                     break;
 
                 case R.id.btn_opt_out:
-                        Util.showAlert(getApplicationContext(), OPT_OUT, "Smartech Demo", "Do you want to Opt in?");
+                    Util.showAlert(MainActivity.this, OPT_OUT, "Smartech Demo", "Do you want to Opt in?");
                     break;
 
                 case R.id.btn_custom_data:
-                        startActivity(new Intent(MainActivity.this, CustomActivity.class));
+                    startActivity(new Intent(MainActivity.this, CustomActivity.class));
                     break;
 
                 case R.id.btn_other_function:
-                        startActivity(new Intent(MainActivity.this, OtherFunctionsActivity.class));
+                    startActivity(new Intent(MainActivity.this, OtherFunctionsActivity.class));
                     break;
 
                 case R.id.btn_guid:
-                        Util.showAlertWithMessage(MainActivity.this, "GUID", Netcore.getGUID(getApplicationContext()));
+                    Util.showAlertWithMessage(MainActivity.this, "GUID", Netcore.getGUID(getApplicationContext()));
                     break;
 
                 case R.id.btn_get_notification:
-                        startActivity(new Intent(MainActivity.this, NotificationCenterActivity.class));
+                    startActivity(new Intent(MainActivity.this, NotificationCenterActivity.class));
                     break;
 
                 case R.id.btn_logout:
                     Netcore.logout(MainActivity.this);
                     SharedPreferencesManager.getInstance(getApplicationContext()).clearLogin();
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
                     break;
 
@@ -211,12 +242,13 @@ public class MainActivity extends AppCompatActivity {
             payload.put("currency", "INR");
             jsonObject.put("payload", payload);
             Netcore.track(MainActivity.this, eventName, jsonObject.toString());
-            Toast.makeText(this, eventName+" Succesfully", Toast.LENGTH_SHORT).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            Toast.makeText(this, eventName + " Succesfully", Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+                Log.e(TAG, "Error: "+ e.getMessage());
         }
 
     }
+
     private void trackEventFunc(int eventId) {
 
         JSONObject jsonObject = new JSONObject();
@@ -224,25 +256,67 @@ public class MainActivity extends AppCompatActivity {
         JSONObject newPayload = new JSONObject();
         try {
 
-            jsonObject.put( "s^name", "Nexus 5" );
-            jsonObject.put( "i^prid", 2 );
-            jsonObject.put( "f^price", 15000);
-            jsonObject.put( "i^prqt",  1);
-            jsonObject.put( "d^dateofpurchase", getCurrentDate() );
-            jsonArray.put( jsonObject );
-            newPayload.put( "payload", jsonArray );
-            Netcore.track( MainActivity.this, eventId, newPayload.toString());
-        }
-        catch ( JSONException e ) {
-            e.printStackTrace();
+            jsonObject.put("s^name", "Nexus 5");
+            jsonObject.put("i^prid", 2);
+            jsonObject.put("f^price", 15000);
+            jsonObject.put("i^prqt", 1);
+            jsonObject.put("d^dateofpurchase", getCurrentDate());
+            jsonArray.put(jsonObject);
+            newPayload.put("payload", jsonArray);
+            Netcore.track(MainActivity.this, eventId, newPayload.toString());
+        } catch (Exception e){
+                Log.e(TAG, "Error: "+ e.getMessage());
         }
 
     }
 
-    private String getCurrentDate(){
+    private String getCurrentDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return simpleDateFormat.format(new Date());
     }
 
-
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        switch (id){
+//            case R.id.english:
+//                refreshLanguage(getBaseContext(), "en");
+//                return true;
+//            case R.id.vietnamese:
+//                refreshLanguage(getBaseContext(), "vi");
+//                return true;
+////            case R.id.item3:
+////                Toast.makeText(getApplicationContext(),"Item 3 Selected",Toast.LENGTH_LONG).show();
+////                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
+    public void refreshLanguage(Context baseContext, String language) {
+        Log.e(TAG, "refreshLanguage: "+Build.VERSION.SDK_INT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Locale locale = new Locale(language);
+            Configuration conf = baseContext.getResources().getConfiguration();
+            LocaleList localeList = new LocaleList(locale);
+            localeList.setDefault(localeList);
+            conf.setLocales(localeList);
+            Toast.makeText(baseContext, "Language changed.", Toast.LENGTH_SHORT).show();
+            //return baseContext.createConfigurationContext(conf);
+        }
+        else {
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.setLocale(new Locale(language));
+            res.updateConfiguration(conf, dm);
+            Toast.makeText(this, "Language changed.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

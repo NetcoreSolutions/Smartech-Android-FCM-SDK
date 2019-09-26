@@ -1,25 +1,27 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.smartech.demo.Utils.Netcore;
+import com.smartech.nativedemo.Utils.Netcore;
 
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 public class ProfileActivity extends AppCompatActivity {
 
     Button btnSave;
-
+    String TAG = "LoginActivity";
     EditText inputEmail, inputName, inputMobile, inputSalary, inputDOB, inputAge, inputWebsite;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,33 @@ public class ProfileActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar!=null)
         actionBar.setTitle(getResources().getText(R.string.text_profile_title));
+
+        TextView txtCustomPayload = findViewById(R.id.txtCustomPayload);
+        TextView txtDeeplink = findViewById(R.id.txtDeeplink);
+        try {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null)
+                for (String key : bundle.keySet()) {
+                    Log.e(TAG, key + " : " + bundle.get(key).toString());
+                    if (key.equals("customPayload")) {
+                        String data = key + " : " + bundle.get(key).toString();
+                        txtCustomPayload.setText(data);
+                        Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
+                    }
+                    if(key.equals("deeplink")){
+                        String data = key + " : " + bundle.get(key).toString();
+                        txtDeeplink.setText(data);
+                        Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
+
+                        Uri uri = Uri.parse(bundle.get(key).toString());
+                        String keyValue = uri.getQueryParameter("param1");
+
+                        //Toast.makeText(this,  "param1 : " + keyValue, Toast.LENGTH_LONG).show();
+                    }
+                }
+        } catch (Exception e){
+            Log.e(TAG, "Error: "+ e.getMessage());
+        }
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +94,9 @@ public class ProfileActivity extends AppCompatActivity {
                         Toast.makeText(ProfileActivity.this, "Profile update succesfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                         startActivity(intent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    } catch (Exception e){
+                Log.e(TAG, "Error: "+ e.getMessage());
+        }
                 }else {
                     Toast.makeText(ProfileActivity.this, getResources().getText(R.string.text_hint_mandatory_all_field), Toast.LENGTH_SHORT).show();
                 }

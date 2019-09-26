@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,9 +13,9 @@
         android:id="@+id/edit_til_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin8"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginEnd="@dimen/margin8"
+        android:layout_marginStart="@dimen/widget_margin_small"
+        android:layout_marginTop="@dimen/widget_margin_small"
+        android:layout_marginEnd="@dimen/widget_margin_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline">
@@ -32,9 +32,9 @@
         android:id="@+id/edit_til_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin8"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginEnd="@dimen/margin8"
+        android:layout_marginStart="@dimen/widget_margin_small"
+        android:layout_marginTop="@dimen/widget_margin_small"
+        android:layout_marginEnd="@dimen/widget_margin_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_til_email">
@@ -57,13 +57,13 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/widget_margin_small"
         android:background="@drawable/button_design"
         android:text="Login"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edit_til_pass"
         app:layout_constraintStart_toStartOf="@+id/edit_til_pass"
@@ -73,7 +73,7 @@
         android:id="@+id/text_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/widget_margin_medium"
         android:gravity="center"
         android:text="Skip"
         android:textAllCaps="false"
@@ -81,4 +81,4 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

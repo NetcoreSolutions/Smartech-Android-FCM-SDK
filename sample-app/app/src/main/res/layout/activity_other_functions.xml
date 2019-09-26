@@ -1,141 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OtherFunctionsActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_other_function_til_lattitude"
-        android:layout_width="@dimen/margin0"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin8"
-        android:layout_marginTop="@dimen/margin32"
-        android:layout_marginEnd="@dimen/margin8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/activity_other_function_et_lattitude"
-            android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/activity_other_function_til_lattitude"
+            android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="Enter lattitude" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginStart="@dimen/widget_margin_small"
+            android:layout_marginTop="@dimen/widget_marging_largest"
+            android:layout_marginEnd="@dimen/widget_margin_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_other_function_til_longitude"
-        android:layout_width="@dimen/margin0"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin8"
-        app:layout_constraintEnd_toEndOf="@+id/activity_other_function_til_lattitude"
-        app:layout_constraintStart_toStartOf="@+id/activity_other_function_til_lattitude"
-        app:layout_constraintTop_toBottomOf="@+id/activity_other_function_til_lattitude">
+            <EditText
+                android:id="@+id/activity_other_function_et_lattitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="Enter lattitude" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/activity_other_function_et_longitude"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/activity_other_function_til_longitude"
+            android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="Enter longitude" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="@dimen/widget_margin_small"
+            app:layout_constraintEnd_toEndOf="@+id/activity_other_function_til_lattitude"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_til_lattitude"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_til_lattitude">
 
-    <Button
-        android:id="@+id/activity_other_function_btn_set_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/button_design"
-        android:text="Set location"
-        android:textAllCaps="false"
-        android:textColor="@color/color_white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/activity_other_function_til_longitude"
-        app:layout_constraintTop_toBottomOf="@+id/activity_other_function_til_longitude" />
+            <EditText
+                android:id="@+id/activity_other_function_et_longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="Enter longitude" />
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_other_function_til_set_token"
-        android:layout_width="@dimen/margin0"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin32"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/activity_other_function_btn_set_location"
-        app:layout_constraintTop_toBottomOf="@+id/activity_other_function_btn_set_location">
-
-        <EditText
-            android:id="@+id/activity_other_function_et_set_token"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/activity_other_function_btn_set_location"
+            android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
-            android:hint="Enter push token" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_margin="@dimen/widget_margin_small"
+            android:background="@drawable/button_design"
+            android:text="Set location"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_til_longitude"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_til_longitude" />
 
-  <Button
-      android:id="@+id/activity_other_function_btn_set_token"
-      android:layout_width="@dimen/margin0"
-      android:layout_height="43dp"
-      android:layout_marginTop="@dimen/margin8"
-      android:text="Set token"
-      android:background="@drawable/button_design"
-      android:textColor="@color/color_white"
-      android:textStyle="bold"
-      android:textAllCaps="false"
-      app:layout_constraintEnd_toEndOf="@+id/activity_other_function_til_set_token"
-      app:layout_constraintStart_toStartOf="@+id/activity_other_function_til_set_token"
-      app:layout_constraintTop_toBottomOf="@+id/activity_other_function_til_set_token" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/activity_other_function_til_set_token"
+            android:layout_width="@dimen/zero_margin"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_marging_largest"
+            android:layout_marginRight="@dimen/zero_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_btn_set_location"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_btn_set_location">
 
-  <Button
-      android:id="@+id/activity_other_function_btn_get_token"
-      android:layout_width="@dimen/margin0"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/margin8"
-      android:text="Get token"
-      android:background="@drawable/button_design"
-      android:textColor="@color/color_white"
-      android:textStyle="bold"
-      android:textAllCaps="false"
-      app:layout_constraintEnd_toEndOf="@+id/activity_other_function_btn_set_token"
-      app:layout_constraintStart_toStartOf="@+id/activity_other_function_btn_set_token"
-      app:layout_constraintTop_toBottomOf="@+id/activity_other_function_btn_set_token" />
+            <EditText
+                android:id="@+id/activity_other_function_et_set_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter push token" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/activity_other_function_clear_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Clear Identity"
-        android:textColor="@color/color_white"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:background="@drawable/button_design"
-        app:layout_constraintEnd_toEndOf="@+id/activity_other_function_btn_get_token"
-        app:layout_constraintStart_toStartOf="@+id/activity_other_function_btn_get_token"
-        app:layout_constraintTop_toBottomOf="@+id/activity_other_function_btn_get_token" />
+        <Button
+            android:id="@+id/activity_other_function_btn_set_token"
+            android:layout_width="@dimen/zero_margin"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/widget_margin_small"
+            android:text="Set token"
+            android:background="@drawable/button_design"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/activity_other_function_til_set_token"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_til_set_token"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_til_set_token" />
 
-    <Button
-        android:id="@+id/btn_current_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/button_design"
-        android:text="Get Current Location"
-        android:textAllCaps="false"
-        android:textColor="@color/color_white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_other_function_btn_set_location"
-        app:layout_constraintEnd_toEndOf="@+id/activity_other_function_til_longitude"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/activity_other_function_btn_set_location" />
+        <Button
+            android:id="@+id/activity_other_function_btn_get_token"
+            android:layout_width="@dimen/zero_margin"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_margin_small"
+            android:text="Get token"
+            android:background="@drawable/button_design"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/activity_other_function_btn_set_token"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_btn_set_token"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_btn_set_token" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/activity_other_function_clear_id"
+            android:layout_width="@dimen/zero_margin"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_margin_small"
+            android:text="Clear Identity"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:background="@drawable/button_design"
+            app:layout_constraintEnd_toEndOf="@+id/activity_other_function_btn_get_token"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_btn_get_token"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_btn_get_token" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/activity_other_function_txt_appid"
+            android:layout_width="@dimen/zero_margin"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_marging_largest"
+            android:layout_marginRight="@dimen/zero_margin"
+            app:layout_constraintEnd_toEndOf="@+id/activity_other_function_clear_id"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_clear_id"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_clear_id">
+
+            <EditText
+                android:id="@+id/activity_other_function_et_appid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Application ID" />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/activity_other_function_change_app_id"
+            android:layout_width="@dimen/zero_margin"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_margin_small"
+            android:layout_marginBottom="@dimen/widget_margin_small"
+            android:text="Change APP ID"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:background="@drawable/button_design"
+            app:layout_constraintEnd_toEndOf="@+id/activity_other_function_txt_appid"
+            app:layout_constraintStart_toStartOf="@+id/activity_other_function_txt_appid"
+            app:layout_constraintTop_toBottomOf="@+id/activity_other_function_txt_appid" />
+
+        <Button
+            android:id="@+id/btn_current_location"
+            android:layout_width="@dimen/zero_margin"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/widget_margin_small"
+            android:background="@drawable/button_design"
+            android:text="Get Current Location"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_other_function_btn_set_location"
+            app:layout_constraintEnd_toEndOf="@+id/activity_other_function_til_longitude"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/activity_other_function_btn_set_location" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -3,57 +3,57 @@
     <item android:state_pressed="true" >
         <shape>
             <gradient
-                android:startColor="#21618c"
-                android:endColor="#21618c"
+                android:startColor="@color/colorPrimary"
+                android:endColor="@color/colorPrimaryDark"
                 android:angle="270" />
       <!--      <stroke
                 android:width="3dp"
                 android:color="@color/grey05" />-->
             <corners
-                android:radius="3dp" />
+                android:radius="@dimen/button_radious" />
             <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
+                android:left="@dimen/button_padding"
+                android:top="@dimen/button_padding"
+                android:right="@dimen/button_padding"
+                android:bottom="@dimen/button_padding" />
         </shape>
     </item>
 
     <item android:state_focused="true" >
         <shape>
             <gradient
-                android:endColor="#21618c"
-                android:startColor="#21618c"
+                android:endColor="@color/colorPrimary"
+                android:startColor="@color/colorPrimaryDark"
                 android:angle="270" />
            <!-- <stroke
                 android:width="3dp"
                 android:color="@color/grey05" />-->
             <corners
-                android:radius="3dp" />
+                android:radius="@dimen/button_radious" />
             <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
+                android:left="@dimen/button_padding"
+                android:top="@dimen/button_padding"
+                android:right="@dimen/button_padding"
+                android:bottom="@dimen/button_padding" />
         </shape>
     </item>
 
     <item>
         <shape>
             <gradient
-                android:endColor="#21618c"
-                android:startColor="#21618c"
+                android:endColor="@color/colorPrimary"
+                android:startColor="@color/colorPrimaryDark"
                 android:angle="270" />
           <!--  <stroke
                 android:width="3dp"
                 android:color="@color/grey05" />-->
             <corners
-                android:radius="3dp" />
+                android:radius="@dimen/button_radious" />
             <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
+                android:left="@dimen/button_padding"
+                android:top="@dimen/button_padding"
+                android:right="@dimen/button_padding"
+                android:bottom="@dimen/button_padding" />
         </shape>
     </item>
 

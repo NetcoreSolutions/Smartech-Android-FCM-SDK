@@ -79,11 +79,10 @@ public class CarouselAdapter extends PagerAdapter implements View.OnClickListene
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view.equals(object);
-    } 
+    }
 
     @Override
     public void onClick(View v) {
 
     }
 }
-

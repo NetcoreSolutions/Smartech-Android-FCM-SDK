@@ -1,4 +1,4 @@
-package com.smartech.demo.Utils;
+package com.smartech.nativedemo.Utils;
 
 import android.app.Application;
 import android.content.Context;
@@ -12,10 +12,11 @@ import in.netcore.smartechfcm.NetcoreSDK;
 
 public class Netcore {
 
-    private static final String APPID = "<app_id>";
-
+    public static final String APPID = "903c8fa4dcf982b0626b48a1a932fb1a";
+//    public static final String APPID = "9fc5f726d8ae0c435e81840bd2239be9";
+//    public static final String APPID = "1e8cd0b0b74f05b0f919a050d400d53b";
     public static void register(Application context){
-        NetcoreSDK.register(context, APPID);
+        NetcoreSDK.register(context, SharedPreferencesManager.getInstance(context).getSmartechId());
     }
     public static void login(Context context, String identity){
         NetcoreSDK.setIdentity(context,identity);
