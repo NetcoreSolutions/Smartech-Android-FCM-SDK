@@ -47,6 +47,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         activityNotificationToolbar.setTitle("Notification Manager");
         activityNotificationToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         activityNotificationToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
+        activityNotificationToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         setSupportActionBar(activityNotificationToolbar);
      /*   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -132,4 +133,3 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         }
     }
 }
-
