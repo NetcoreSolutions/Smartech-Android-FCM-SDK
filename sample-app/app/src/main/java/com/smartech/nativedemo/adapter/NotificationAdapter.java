@@ -1,4 +1,4 @@
-package com.smartech.nativedemo.Adapter;
+package com.smartech.nativedemo.notificationcenter.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,11 +23,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-
 import com.smartech.nativedemo.R;
-import com.smartech.nativedemo.Utils.Netcore;
-import com.smartech.nativedemo.Utils.Util;
-
+import com.smartech.nativedemo.sdks.SDKHandler;
+import com.smartech.nativedemo.utils.UIConstants;
 
 import org.json.JSONObject;
 
@@ -45,6 +43,7 @@ import in.netcore.smartechfcm.notification.NotificationList;
 
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> implements ClickInterface {
+    public static final String TAG = NotificationAdapter.class.getSimpleName();
     private static final String dateFormat = "dd MMM yyyy";
     private static final String text_today = "Today";
     private static final String text_yesterday = "Yesterday";
@@ -58,14 +57,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private List<NotificationList> notificationList;
     private List<NotificationList.NotificationModel> notificationModelList;
     private List<String> selectedList;
-
     private Gson gson;
     private DeleteEventsListener deleteListener;
     private boolean selectedFlag = false;
     private CarouselAdapter carouselAdapter;
     private int selectedItemPosition = -1;
     private int deselectedItemPosition = -1;
-    public static final String TAG = NotificationAdapter.class.getSimpleName();
 
     public NotificationAdapter(Context context, List<NotificationList> notificationList, DeleteEventsListener deleteEventsListener) {
         notificationModelList = new ArrayList<>();
@@ -193,16 +190,21 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
                     }
                 } else {
-                    if (!notificationModel.getDeeplink().trim().equals("") && notificationModel.getDeeplink() != null) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(notificationModel.getDeeplink()));
-                        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    if (notificationModel.getDeeplink() != null && !notificationModel.getDeeplink().trim().equals("")) {
+                        try {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(notificationModel.getDeeplink()));
+                            browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString(Util.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
-                        bundle.putString(Util.NC_DEEP_LINK, notificationModel.getDeeplink());
-                        browserIntent.putExtras(bundle);
+                            Bundle bundle = new Bundle();
+                            bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
+                            bundle.putString(UIConstants.NC_DEEP_LINK, notificationModel.getDeeplink());
+                            browserIntent.putExtras(bundle);
 
-                        mContext.startActivity(browserIntent);
+                            mContext.startActivity(browserIntent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(mContext, "Invalid Deeplink", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
 
@@ -261,9 +263,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     private void setNotificationStatus(TextView textTitle, int pos) {
         String notificationStatus = notificationList.get(pos).getStatus();
-
+        SDKHandler.markNotificationAsRead(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink());
         if (notificationStatus.equals(text_unread)) {
-            Netcore.markNotificationAsRead(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink());
             notificationStatus = text_read;
             notificationList.get(pos).setStatus(notificationStatus);
         }
@@ -314,15 +315,20 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             @Override
             public void onClick(View v) {
                 setNotificationStatus(tvTitle, position);
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, actionButtonUri);
-                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, actionButtonUri);
+                    browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Util.NC_CUSTOM_PAYLOAD, actionButtonUri.toString());
-                bundle.putString(Util.NC_DEEP_LINK, customPayload);
-                browserIntent.putExtras(bundle);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, actionButtonUri.toString());
+                    bundle.putString(UIConstants.NC_DEEP_LINK, customPayload);
+                    browserIntent.putExtras(bundle);
 
-                mContext.startActivity(browserIntent);
+                    mContext.startActivity(browserIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(mContext, "Invalid Deeplink", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -335,9 +341,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 String msgJsonString = jsonObjectNotification.getString("data");
                 NotificationList.NotificationModel notificatonModel = gson.fromJson(msgJsonString, NotificationList.NotificationModel.class);
                 notificationModelList.add(notificatonModel);
-            } catch (Exception e){
-                Log.e(TAG, "Error: "+ e.getMessage());
-        }
+            } catch (Exception e) {
+                Log.e(TAG, "Error: " + e.getMessage());
+            }
         }
         notifyDataSetChanged();
     }
@@ -377,15 +383,20 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 deleteListener.showDeleteAction(selectedFlag);
             }
         } else {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, deepLink);
-            browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, deepLink);
+                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            Bundle bundle = new Bundle();
-            bundle.putString(Util.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
-            bundle.putString(Util.NC_DEEP_LINK, notificationModel.getDeeplink());
-            browserIntent.putExtras(bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
+                bundle.putString(UIConstants.NC_DEEP_LINK, notificationModel.getDeeplink());
+                browserIntent.putExtras(bundle);
 
-            mContext.startActivity(browserIntent);
+                mContext.startActivity(browserIntent);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(mContext, "Invalid Deeplink", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

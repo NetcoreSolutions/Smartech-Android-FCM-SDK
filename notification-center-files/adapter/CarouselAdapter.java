@@ -1,7 +1,8 @@
-package com.smartech.nativedemo.Adapter;
+package com.smartech.nativedemo.notificationcenter.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import com.smartech.nativedemo.R;
-import com.smartech.nativedemo.Utils.Netcore;
+import com.smartech.nativedemo.sdks.SDKHandler;
 
-import androidx.annotation.NonNull;
 import in.netcore.smartechfcm.notification.ClickInterface;
 import in.netcore.smartechfcm.notification.NotificationList;
 
@@ -55,9 +55,9 @@ public class CarouselAdapter extends PagerAdapter implements View.OnClickListene
                 clickInterface.onCarouselItemClickListener(notification,notificationPosition,Uri.parse(notification.getCarousel().get(position).getImgDeeplink()));
                 if (!notification.getCarousel().get(position).getImgDeeplink().isEmpty() &&
                         notification.getCarousel().get(position).getImgDeeplink() != null) {
-                    if (notificationList.getStatus().equals("unread")) {
-                        Netcore.markNotificationAsRead(context, notification.getTrid(), notification.getDeeplink());
-                    }
+                    //if (notificationList.getStatus().equals("unread")) {
+                        SDKHandler.markNotificationAsRead(context, notification.getTrid(), notification.getDeeplink());
+                    //}
                 }
             }
         });
