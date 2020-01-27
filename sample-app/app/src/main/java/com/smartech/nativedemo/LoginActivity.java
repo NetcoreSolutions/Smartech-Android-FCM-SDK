@@ -1,9 +1,7 @@
 package com.smartech.nativedemo;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartech.nativedemo.Utils.Netcore;
 import com.smartech.nativedemo.Utils.SharedPreferencesManager;
@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String TAG = "LoginActivity";
     private Button btnLogin;
     private TextView textSkip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,29 +30,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mPasswordView = findViewById(R.id.edit_pass);
         btnLogin = findViewById(R.id.btn_login);
         textSkip = findViewById(R.id.text_skip);
-        String status= SharedPreferencesManager.getInstance(getApplicationContext()).getLoginValue();
-       if (status!=null && status.equals("login")){
-          startActivity(new Intent(LoginActivity.this,MainActivity.class));
-          finish();
-       }
+        String status = SharedPreferencesManager.getInstance(getApplicationContext()).getLoginValue();
+        if (status != null && status.equals("login")) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
 
         try {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null)
                 for (String key : bundle.keySet()) {
                     Log.e(TAG, key + " : " + bundle.get(key).toString());
-                    if(key.equals("deeplink")){
+                    if (key.equals("deeplink")) {
                         Uri uri = Uri.parse(bundle.get(key).toString());
                         String keyValue = uri.getQueryParameter("param1");
-                        Log.e(TAG, "onCreate: "+keyValue);
+                        Log.e(TAG, "onCreate: " + keyValue);
                     }
                     if (key.equals("customPayload")) {
                         Log.e(TAG, key + " : " + bundle.get(key).toString());
                         Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
                     }
                 }
-        } catch (Exception e){
-            Log.e(TAG, "Error: "+ e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, "Error: " + e.getMessage());
         }
 
         btnLogin.setOnClickListener(this);
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String email = mEmailView.getText().toString();
                 String password = mPasswordView.getText().toString();
                 if (!email.trim().isEmpty() && !password.trim().isEmpty()) {
-                    Netcore.login(LoginActivity.this,email);
+                    Netcore.login(LoginActivity.this, email);
                     SharedPreferencesManager.getInstance(getApplicationContext()).setLoginValue("login");
                     startActivity(new Intent(this, MainActivity.class));
                     finish();

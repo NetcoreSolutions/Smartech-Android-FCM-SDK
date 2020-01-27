@@ -1,20 +1,15 @@
 package com.smartech.nativedemo;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
-import android.os.LocaleList;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -22,37 +17,118 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.work.WorkManager;
-
-import org.json.JSONArray;
-
-import org.json.JSONObject;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartech.nativedemo.Activity.NotificationCenterActivity;
 import com.smartech.nativedemo.Utils.Netcore;
 import com.smartech.nativedemo.Utils.SharedPreferencesManager;
 import com.smartech.nativedemo.Utils.Util;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    String TAG = "LoginActivity";
-    private ActionBar actionBar;
-    private TextView textNotificationCount;
-    private Button btnAddCart, btnRemoveCart, btnCheckout, btnCartExpired, btnPageBrowse, btnProfileUpdate,
-            btnOptIn, btnOptOut, btnCustomData, btnOtherFunction, btnGuid, btnGetNotification, btnLogout;
     public static final int OPT_IN = 1;
     public static final int OPT_OUT = 2;
-    Switch switchEvent;
-    boolean eventflag = false;
     public static final int PAGE_BROWSE = 1;
     public static final int ADD_TO_CART = 2;
     public static final int CHECKOUT = 3;
     public static final int CART_EXPIRY = 4;
     public static final int REMOVE_FROM_CART = 5;
+    String TAG = "LoginActivity";
+    Switch switchEvent;
+    boolean eventflag = false;
+    View.OnClickListener onClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_add_cart:
+                    if (!eventflag) {
+                        trackEventFunc(getResources().getString(R.string.text_add_to_cart));
+                    } else {
+                        trackEventFunc(ADD_TO_CART);
+                    }
+                    break;
 
+                case R.id.btn_remove_cart:
+                    if (!eventflag) {
+                        trackEventFunc(getResources().getString(R.string.text_remove_from_cart));
+                    } else {
+                        trackEventFunc(REMOVE_FROM_CART);
+                    }
+                    break;
+
+                case R.id.btn_checkout:
+                    if (!eventflag) {
+                        trackEventFunc(getResources().getString(R.string.text_checkout));
+                    } else {
+                        trackEventFunc(CHECKOUT);
+                    }
+                    break;
+
+                case R.id.btn_cart_expired:
+                    if (!eventflag) {
+                        trackEventFunc(getResources().getString(R.string.text_cart_expired));
+                    } else {
+                        trackEventFunc(CART_EXPIRY);
+                    }
+                    break;
+
+                case R.id.btn_page_browse:
+                    if (!eventflag) {
+                        trackEventFunc(getResources().getString(R.string.text_page_browse));
+                    } else {
+                        trackEventFunc(PAGE_BROWSE);
+                    }
+                    break;
+
+                case R.id.btn_profile_update:
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    break;
+
+                case R.id.btn_opt_in:
+                    Util.showAlert(MainActivity.this, OPT_IN, "Smartech Demo", "Do you want to Opt in?");
+                    break;
+
+                case R.id.btn_opt_out:
+                    Util.showAlert(MainActivity.this, OPT_OUT, "Smartech Demo", "Do you want to Opt in?");
+                    break;
+
+                case R.id.btn_custom_data:
+                    startActivity(new Intent(MainActivity.this, CustomActivity.class));
+                    break;
+
+                case R.id.btn_other_function:
+                    startActivity(new Intent(MainActivity.this, OtherFunctionsActivity.class));
+                    break;
+
+                case R.id.btn_guid:
+                    Util.showAlertWithMessage(MainActivity.this, "GUID", Netcore.getGUID(getApplicationContext()));
+                    break;
+
+                case R.id.btn_get_notification:
+                    startActivity(new Intent(MainActivity.this, NotificationCenterActivity.class));
+                    break;
+
+                case R.id.btn_logout:
+                    Netcore.logout(MainActivity.this);
+                    SharedPreferencesManager.getInstance(getApplicationContext()).clearLogin();
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                    break;
+
+            }
+        }
+    };
+    private ActionBar actionBar;
+    private TextView textNotificationCount;
+    private Button btnAddCart, btnRemoveCart, btnCheckout, btnCartExpired, btnPageBrowse, btnProfileUpdate,
+            btnOptIn, btnOptOut, btnCustomData, btnOtherFunction, btnGuid, btnGetNotification, btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                         txtCustomPayload.setText(data);
                         Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
                     }
-                    if(key.equals("deeplink")){
+                    if (key.equals("deeplink")) {
                         String data = key + " : " + bundle.get(key).toString();
                         txtDeeplink.setText(data);
                         Toast.makeText(this, key + " : " + bundle.get(key).toString(), Toast.LENGTH_LONG).show();
@@ -131,8 +207,8 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(this,  "param1 : " + keyValue, Toast.LENGTH_LONG).show();
                     }
                 }
-        } catch (Exception e){
-            Log.e(TAG, "Error: "+ e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, "Error: " + e.getMessage());
         }
     }
 
@@ -153,83 +229,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener onClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btn_add_cart:
-                    if (!eventflag) {
-                        trackEventFunc(getResources().getString(R.string.text_add_to_cart));
-                    }else {trackEventFunc(ADD_TO_CART);}
-                    break;
-
-                case R.id.btn_remove_cart:
-                    if (!eventflag) {
-                        trackEventFunc(getResources().getString(R.string.text_remove_from_cart));
-                    }else {trackEventFunc(REMOVE_FROM_CART);}
-                    break;
-
-                case R.id.btn_checkout:
-                    if (!eventflag) {
-                        trackEventFunc(getResources().getString(R.string.text_checkout));
-                    }else {trackEventFunc(CHECKOUT);}
-                    break;
-
-                case R.id.btn_cart_expired:
-                    if (!eventflag) {
-                        trackEventFunc(getResources().getString(R.string.text_cart_expired));
-                    } else {
-                        trackEventFunc(CART_EXPIRY);
-                    }
-                    break;
-
-                case R.id.btn_page_browse:
-                    if (!eventflag) {
-                        trackEventFunc(getResources().getString(R.string.text_page_browse));
-                    } else {
-                        trackEventFunc(PAGE_BROWSE);
-                    }
-                    break;
-
-                case R.id.btn_profile_update:
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                    break;
-
-                case R.id.btn_opt_in:
-                    Util.showAlert(MainActivity.this, OPT_IN, "Smartech Demo", "Do you want to Opt in?");
-                    break;
-
-                case R.id.btn_opt_out:
-                    Util.showAlert(MainActivity.this, OPT_OUT, "Smartech Demo", "Do you want to Opt in?");
-                    break;
-
-                case R.id.btn_custom_data:
-                    startActivity(new Intent(MainActivity.this, CustomActivity.class));
-                    break;
-
-                case R.id.btn_other_function:
-                    startActivity(new Intent(MainActivity.this, OtherFunctionsActivity.class));
-                    break;
-
-                case R.id.btn_guid:
-                    Util.showAlertWithMessage(MainActivity.this, "GUID", Netcore.getGUID(getApplicationContext()));
-                    break;
-
-                case R.id.btn_get_notification:
-                    startActivity(new Intent(MainActivity.this, NotificationCenterActivity.class));
-                    break;
-
-                case R.id.btn_logout:
-                    Netcore.logout(MainActivity.this);
-                    SharedPreferencesManager.getInstance(getApplicationContext()).clearLogin();
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                    break;
-
-            }
-        }
-    };
-
     private void trackEventFunc(String eventName) {
 
         try {
@@ -243,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
             jsonObject.put("payload", payload);
             Netcore.track(MainActivity.this, eventName, jsonObject.toString());
             Toast.makeText(this, eventName + " Succesfully", Toast.LENGTH_SHORT).show();
-        } catch (Exception e){
-                Log.e(TAG, "Error: "+ e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, "Error: " + e.getMessage());
         }
 
     }
@@ -264,8 +263,8 @@ public class MainActivity extends AppCompatActivity {
             jsonArray.put(jsonObject);
             newPayload.put("payload", jsonArray);
             Netcore.track(MainActivity.this, eventId, newPayload.toString());
-        } catch (Exception e){
-                Log.e(TAG, "Error: "+ e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, "Error: " + e.getMessage());
         }
 
     }
@@ -275,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         return simpleDateFormat.format(new Date());
     }
 
-//    @Override
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -300,17 +299,16 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
     public void refreshLanguage(Context baseContext, String language) {
-        Log.e(TAG, "refreshLanguage: "+Build.VERSION.SDK_INT);
+        Log.e(TAG, "refreshLanguage: " + Build.VERSION.SDK_INT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Locale locale = new Locale(language);
             Configuration conf = baseContext.getResources().getConfiguration();
             LocaleList localeList = new LocaleList(locale);
-            localeList.setDefault(localeList);
+            LocaleList.setDefault(localeList);
             conf.setLocales(localeList);
             Toast.makeText(baseContext, "Language changed.", Toast.LENGTH_SHORT).show();
             //return baseContext.createConfigurationContext(conf);
-        }
-        else {
+        } else {
             Resources res = getResources();
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();

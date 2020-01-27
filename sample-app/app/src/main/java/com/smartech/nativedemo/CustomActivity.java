@@ -1,18 +1,19 @@
 package com.smartech.nativedemo;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.smartech.nativedemo.Utils.Netcore;
 
 public class CustomActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText etEventName,etPayload;
+    private EditText etEventName, etPayload;
     private Button btnSubmit;
     private String payload = "{\n" +
             "    \"payload\": {\n" +
@@ -49,13 +50,14 @@ public class CustomActivity extends AppCompatActivity implements View.OnClickLis
             "        }\n" +
             "    }\n" +
             "}\n}";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
 
-        etEventName =  findViewById(R.id.activity_custom_page_et_event_name);
-        etPayload =  findViewById(R.id.activity_custom_page_et_custom_payload);
+        etEventName = findViewById(R.id.activity_custom_page_et_event_name);
+        etPayload = findViewById(R.id.activity_custom_page_et_custom_payload);
         btnSubmit = findViewById(R.id.activity_custom_page_btn_submit);
 
         etEventName.setText("event1");
@@ -76,9 +78,10 @@ public class CustomActivity extends AppCompatActivity implements View.OnClickLis
         onBackPressed();
         return true;
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.activity_custom_page_btn_submit:
                 SharedPreferences pref = this.getSharedPreferences("storedData", 0); // 0 - for private mode
                 Netcore.track(CustomActivity.this, etEventName.getText().toString().trim(), etPayload.getText().toString().trim());

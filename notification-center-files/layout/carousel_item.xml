@@ -2,13 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
     <ImageView
         android:id="@+id/imgCarousel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/placeholder_carousal" />
+        android:layout_gravity="center"
+        android:src="@drawable/placeholder_carousal"
+        android:scaleType="fitXY"/>
 </FrameLayout>

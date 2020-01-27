@@ -21,24 +21,25 @@ public class SharedPreferencesManager {
     }
 
 
-    public  String getLoginValue() {
-        return sharedPreferences.getString(STATUS_LOGIN , null);
+    public String getLoginValue() {
+        return sharedPreferences.getString(STATUS_LOGIN, null);
     }
 
-    public  void setLoginValue(String newValue) {
-        editor.putString(STATUS_LOGIN , newValue);
-        editor.apply();
-    }
-    public  String getSmartechId() {
-        return sharedPreferences.getString(SMARTECH_ID , Netcore.APPID);
-    }
-
-    public  void setSmartechId(String appid) {
-        editor.putString(SMARTECH_ID , appid);
+    public void setLoginValue(String newValue) {
+        editor.putString(STATUS_LOGIN, newValue);
         editor.apply();
     }
 
-    public  void clearLogin(){
+    public String getSmartechId() {
+        return sharedPreferences.getString(SMARTECH_ID, Netcore.APPID);
+    }
+
+    public void setSmartechId(String appid) {
+        editor.putString(SMARTECH_ID, appid);
+        editor.apply();
+    }
+
+    public void clearLogin() {
         editor.clear();
         editor.apply();
     }
