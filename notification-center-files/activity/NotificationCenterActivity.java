@@ -56,8 +56,6 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         setSupportActionBar(activityNotificationToolbar);
      /*   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);*/
-
-
         actvityNotificationDeleteIcon.setOnClickListener(this);
     }
 
