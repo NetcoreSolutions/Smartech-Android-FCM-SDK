@@ -35,8 +35,7 @@ public class SmartechApplication extends MultiDexApplication implements SMTNotif
     }
 
     private void createDemoChannel() {
-//        NetcoreSDK.deleteNotificationChannelGroup(this, "aa");
-//        NetcoreSDK.deleteNotificationChannel(this, "coon");
+
         NetcoreSDK.createNotificationChannelGroup(this, "group1", "group1");
         NetcoreSDK.createNotificationChannelGroup(this, "group2", "group2");
 //

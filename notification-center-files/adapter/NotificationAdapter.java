@@ -264,6 +264,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     private void setNotificationStatus(TextView textTitle, int pos) {
         String notificationStatus = notificationList.get(pos).getStatus();
+	//depricated will change it later.
         Netcore.openNotificationEvent(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink());
         if (notificationStatus.equals(text_unread)) {
             notificationStatus = text_read;
