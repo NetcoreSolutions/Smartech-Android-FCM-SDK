@@ -1,5 +1,5 @@
 package com.smartech.nativedemo.Adapter;
-
+ 
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
