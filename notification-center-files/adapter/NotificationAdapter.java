@@ -1,4 +1,4 @@
-package com.smartech.nativedemo.Adapter;
+package com.smartech.nativedemo.notificationcenter.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,10 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,16 +21,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.smartech.nativedemo.R;
-import com.smartech.nativedemo.Utils.Netcore;
-import com.smartech.nativedemo.Utils.Util;
+import com.smartech.nativedemo.sdks.SDKHandler;
+import com.smartech.nativedemo.utils.UIConstants;
 
 import org.json.JSONObject;
 
@@ -95,6 +94,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.textTitle.setTypeface(null,
                 notificationList.get(position).getStatus().equals(text_read) ? Typeface.NORMAL : Typeface.BOLD);
         holder.textTitle.setText(notificationModel.getTitle() != null ? notificationModel.getTitle() : "");
+        holder.textSubTitle.setText(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : "");
         holder.textMessage.setText(notificationModel.getMessage() != null ? notificationModel.getMessage() : "");
 
         if (notificationModel.getImage() != null && !notificationModel.getImage().equals("")) {
@@ -197,8 +197,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                             browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                             Bundle bundle = new Bundle();
-                            bundle.putString(Util.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
-                            bundle.putString(Util.NC_DEEP_LINK, notificationModel.getDeeplink());
+                            bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
+                            bundle.putString(UIConstants.NC_DEEP_LINK, notificationModel.getDeeplink());
                             browserIntent.putExtras(bundle);
 
                             mContext.startActivity(browserIntent);
@@ -264,8 +264,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     private void setNotificationStatus(TextView textTitle, int pos) {
         String notificationStatus = notificationList.get(pos).getStatus();
-	//depricated will change it later.
-        Netcore.openNotificationEvent(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink());
+        SDKHandler.openNotificationEvent(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink(), notificationModelList.get(pos).getCustomPayload().toString());
         if (notificationStatus.equals(text_unread)) {
             notificationStatus = text_read;
             notificationList.get(pos).setStatus(notificationStatus);
@@ -322,8 +321,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     Bundle bundle = new Bundle();
-                    bundle.putString(Util.NC_CUSTOM_PAYLOAD, actionButtonUri.toString());
-                    bundle.putString(Util.NC_DEEP_LINK, customPayload);
+                    bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, customPayload);
+                    bundle.putString(UIConstants.NC_DEEP_LINK, actionButtonUri.toString());
                     browserIntent.putExtras(bundle);
 
                     mContext.startActivity(browserIntent);
@@ -390,8 +389,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 Bundle bundle = new Bundle();
-                bundle.putString(Util.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
-                bundle.putString(Util.NC_DEEP_LINK, notificationModel.getDeeplink());
+                bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
+                bundle.putString(UIConstants.NC_DEEP_LINK, notificationModel.getDeeplink());
                 browserIntent.putExtras(bundle);
 
                 mContext.startActivity(browserIntent);
@@ -416,7 +415,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     class NotificationViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         private ImageView imgNotification;
-        private TextView textTitle, textMessage, textDate, text_carousal_message, text_carousal_title;
+        private TextView textTitle, textSubTitle, textMessage, textDate, text_carousal_message, text_carousal_title;
         private Button btnActionOne, btnActionTwo, btnActionThree, btnKnowMore;
         private View dividerview, carousalDividerView;
         private ViewPager mPager;
@@ -429,6 +428,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             imgNotification = itemView.findViewById(R.id.notification_row_imageView);
             btnKnowMore = itemView.findViewById(R.id.btn_know_more);
             textTitle = itemView.findViewById(R.id.notification_row_tv_title);
+            textSubTitle = itemView.findViewById(R.id.text_sub_title);
             textMessage = itemView.findViewById(R.id.text_message);
             textDate = itemView.findViewById(R.id.text_date);
             btnActionOne = itemView.findViewById(R.id.btn_action_one);
@@ -441,7 +441,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             cardView = itemView.findViewById(R.id.card);
             text_carousal_message = itemView.findViewById(R.id.notification_row_carousal_message);
             text_carousal_title = itemView.findViewById(R.id.notification_row_carousal_title);
-            carousalDividerView = itemView.findViewById(R.id.carosal_divider_view);
+            carousalDividerView = itemView.findViewById(R.id.carousal_divider_view);
         }
     }
 }
