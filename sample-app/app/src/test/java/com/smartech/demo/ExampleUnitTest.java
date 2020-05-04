@@ -1,4 +1,4 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
 import org.junit.Test;
 

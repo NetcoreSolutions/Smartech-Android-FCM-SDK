@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -17,13 +19,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.smartech.nativedemo.Activity.NotificationCenterActivity;
-import com.smartech.nativedemo.Utils.Netcore;
-import com.smartech.nativedemo.Utils.SharedPreferencesManager;
-import com.smartech.nativedemo.Utils.Util;
+import com.smartech.nativedemo.activity.NotificationCenterActivity;
+import com.smartech.nativedemo.utils.Netcore;
+import com.smartech.nativedemo.utils.SharedPreferencesManager;
+import com.smartech.nativedemo.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

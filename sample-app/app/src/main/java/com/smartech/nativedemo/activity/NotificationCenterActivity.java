@@ -1,4 +1,4 @@
-package com.smartech.nativedemo.notificationcenter;
+package com.smartech.nativedemo.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.smartech.nativedemo.MainActivity;
 import com.smartech.nativedemo.R;
-import com.smartech.nativedemo.notificationcenter.adapter.NotificationAdapter;
-import com.smartech.nativedemo.sdks.SDKHandler;
+import com.smartech.nativedemo.utils.Netcore;
+import com.smartech.nativedemo.adapter.NotificationAdapter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        SDKHandler.deleteNotification(getApplicationContext(), listDeleteNotifications);
+                        Netcore.deleteNotification(getApplicationContext(), listDeleteNotifications);
                         handleNotificationData();
                         actvityNotificationDeleteIcon.setVisibility(View.GONE);
                     }
@@ -83,7 +83,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         try {
             Type listType = new TypeToken<List<NotificationList>>() {
             }.getType();
-            List<NotificationList> notificationList = gson.fromJson(SDKHandler.getNotifications(getApplicationContext(), 100).toString(), listType);
+            List<NotificationList> notificationList = gson.fromJson(Netcore.getNotifications(getApplicationContext(), 100).toString(), listType);
             if (notificationList.size() <= 0) {
                 //notificationList.clear();
                 notificationRecycler.setVisibility(View.GONE);

@@ -1,4 +1,4 @@
-package com.smartech.nativedemo.Utils;
+package com.smartech.nativedemo.utils;
 
 import android.app.Application;
 import android.content.Context;
@@ -14,10 +14,8 @@ import in.netcore.smartechfcm.notification.SMTNotificationListener;
 
 public class Netcore {
 
-        public static final String APPID = "903c8fa4dcf982b0626b48a1a932fb1a";
-//    public static final String APPID = "12e6345403226a2403a33700b5facc7f";
-//    public static final String APPID = "d76257514ef537f50844d02065ed0714";
-//    public static final String APPID = "1e8cd0b0b74f05b0f919a050d400d53b";
+    public static final String APPID = "903c8fa4dcf982b0626b48a1a932fb1a";
+
 
     public static void register(Application context) {
         NetcoreSDK.register(context, SharedPreferencesManager.getInstance(context).getSmartechId());
@@ -69,8 +67,8 @@ public class Netcore {
         return NetcoreSDK.getUnreadNotificationsCount(context);
     }
 
-    public static void openNotificationEvent(Context context, String trID, String deeplink) {
-        NetcoreSDK.openNotificationEvent(context, trID, deeplink);
+    public static void openNotificationEvent(Context context, String trID, String deeplink, String customPayload) {
+        NetcoreSDK.openNotificationEvent(context, trID, deeplink, customPayload);
     }
 
     public static void optOut(Context context, boolean optOut) {

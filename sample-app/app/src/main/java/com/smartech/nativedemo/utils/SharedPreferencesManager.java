@@ -1,4 +1,4 @@
-package com.smartech.nativedemo.Utils;
+package com.smartech.nativedemo.utils;
 
 import android.app.Activity;
 import android.content.Context;

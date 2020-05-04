@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.smartech.demo"
+        applicationId "com.smartech.nativedemo"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -38,4 +38,4 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     //implementation 'com.google.android.gms:play-services-ads:17.2.0'
 }
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'

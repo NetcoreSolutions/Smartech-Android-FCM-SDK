@@ -1,4 +1,4 @@
-package com.smartech.nativedemo.notificationcenter.adapter;
+package com.smartech.nativedemo.adapter;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,9 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-
 import com.smartech.nativedemo.R;
-import com.smartech.nativedemo.sdks.SDKHandler;
+import com.smartech.nativedemo.utils.Netcore;
 
 import in.netcore.smartechfcm.notification.ClickInterface;
 import in.netcore.smartechfcm.notification.NotificationList;
@@ -25,13 +24,13 @@ public class CarouselAdapter extends PagerAdapter implements View.OnClickListene
     private int notificationPosition;
     private ClickInterface clickInterface;
 
-    CarouselAdapter(Context context, NotificationList.NotificationModel notification, NotificationList notificationList, int notificationPosition, ClickInterface clickInterface) {
+    public CarouselAdapter(Context context, NotificationList.NotificationModel notification, NotificationList notificationList, int notificationPosition, ClickInterface clickInterface) {
         this.context = context;
         this.notification = notification;
         this.notificationList = notificationList;
         inflater = LayoutInflater.from(context);
         this.clickInterface = clickInterface;
-        this.notificationPosition=notificationPosition;
+        this.notificationPosition = notificationPosition;
     }
 
     @Override
@@ -52,11 +51,11 @@ public class CarouselAdapter extends PagerAdapter implements View.OnClickListene
         myImageLayout.setOnClickListener(this);
         myImageLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                clickInterface.onCarouselItemClickListener(notification,notificationPosition,Uri.parse(notification.getCarousel().get(position).getImgDeeplink()));
+                clickInterface.onCarouselItemClickListener(notification, notificationPosition, Uri.parse(notification.getCarousel().get(position).getImgDeeplink()));
                 if (!notification.getCarousel().get(position).getImgDeeplink().isEmpty() &&
                         notification.getCarousel().get(position).getImgDeeplink() != null) {
                     //if (notificationList.getStatus().equals("unread")) {
-                        SDKHandler.markNotificationAsRead(context, notification.getTrid(), notification.getDeeplink());
+                    Netcore.openNotificationEvent(context, notification.getTrid(), notification.getDeeplink(), notification.getCustomPayload().toString());
                     //}
                 }
             }
@@ -65,7 +64,7 @@ public class CarouselAdapter extends PagerAdapter implements View.OnClickListene
         myImageLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                clickInterface.onLongClickListen(notification,notificationPosition);
+                clickInterface.onLongClickListen(notification, notificationPosition);
                 return false;
             }
         });

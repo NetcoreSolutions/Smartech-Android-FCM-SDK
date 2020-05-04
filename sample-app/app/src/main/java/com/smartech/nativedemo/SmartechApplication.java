@@ -1,12 +1,11 @@
 package com.smartech.nativedemo;
 
+import android.app.Application;
 import android.app.NotificationManager;
 import android.graphics.Color;
 import android.util.Log;
 
-import androidx.multidex.MultiDexApplication;
-
-import com.smartech.nativedemo.Utils.Netcore;
+import com.smartech.nativedemo.utils.Netcore;
 
 import org.json.JSONObject;
 
@@ -14,7 +13,7 @@ import in.netcore.smartechfcm.NetcoreSDK;
 import in.netcore.smartechfcm.notification.SMTNotificationListener;
 import in.netcore.smartechfcm.pushnotification.channel.SmtNotificationChannel;
 
-public class SmartechApplication extends MultiDexApplication implements SMTNotificationListener {
+public class SmartechApplication extends Application implements SMTNotificationListener {
 
     public static final String TAG = SmartechApplication.class.getSimpleName();
 
@@ -39,7 +38,7 @@ public class SmartechApplication extends MultiDexApplication implements SMTNotif
         NetcoreSDK.createNotificationChannelGroup(this, "group1", "group1");
         NetcoreSDK.createNotificationChannelGroup(this, "group2", "group2");
 //
-        SmtNotificationChannel smtNotificationChannel = new SmtNotificationChannel.Builder(this,
+        SmtNotificationChannel smtNotificationChannel = new SmtNotificationChannel.Builder(
                 "IMPORTANCE_MIN",
                 "IMPORTANCE_MIN",
                 NotificationManager.IMPORTANCE_MIN)
@@ -48,7 +47,7 @@ public class SmartechApplication extends MultiDexApplication implements SMTNotif
                 .build();
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(this,
+        smtNotificationChannel = new SmtNotificationChannel.Builder(
                 "IMPORTANCE_LOW",
                 "IMPORTANCE_LOW",
                 NotificationManager.IMPORTANCE_LOW)
@@ -58,7 +57,7 @@ public class SmartechApplication extends MultiDexApplication implements SMTNotif
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(this,
+        smtNotificationChannel = new SmtNotificationChannel.Builder(
                 "IMPORTANCE_DEFAULT",
                 "IMPORTANCE_DEFAULT",
                 NotificationManager.IMPORTANCE_DEFAULT)
@@ -68,7 +67,7 @@ public class SmartechApplication extends MultiDexApplication implements SMTNotif
                 .build();
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(this,
+        smtNotificationChannel = new SmtNotificationChannel.Builder(
                 "IMPORTANCE_HIGH",
                 "IMPORTANCE_HIGH",
                 NotificationManager.IMPORTANCE_HIGH)
@@ -78,7 +77,7 @@ public class SmartechApplication extends MultiDexApplication implements SMTNotif
                 .build();
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(this,
+        smtNotificationChannel = new SmtNotificationChannel.Builder(
                 "IMPORTANCE_MAX",
                 "IMPORTANCE_MAX",
                 NotificationManager.IMPORTANCE_MAX)

@@ -1,4 +1,4 @@
-package com.smartech.nativedemo.notificationcenter.adapter;
+package com.smartech.nativedemo.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,8 +24,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.smartech.nativedemo.R;
-import com.smartech.nativedemo.sdks.SDKHandler;
-import com.smartech.nativedemo.utils.UIConstants;
+import com.smartech.nativedemo.utils.Netcore;
 
 import org.json.JSONObject;
 
@@ -94,7 +93,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.textTitle.setTypeface(null,
                 notificationList.get(position).getStatus().equals(text_read) ? Typeface.NORMAL : Typeface.BOLD);
         holder.textTitle.setText(notificationModel.getTitle() != null ? notificationModel.getTitle() : "");
-        holder.textSubTitle.setText(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : "");
         holder.textMessage.setText(notificationModel.getMessage() != null ? notificationModel.getMessage() : "");
 
         if (notificationModel.getImage() != null && !notificationModel.getImage().equals("")) {
@@ -197,8 +195,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                             browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                             Bundle bundle = new Bundle();
-                            bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
-                            bundle.putString(UIConstants.NC_DEEP_LINK, notificationModel.getDeeplink());
+                            bundle.putString("customPayload", notificationModel.getCustomPayload().toString());
+                            bundle.putString("deeplink", notificationModel.getDeeplink());
                             browserIntent.putExtras(bundle);
 
                             mContext.startActivity(browserIntent);
@@ -264,7 +262,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     private void setNotificationStatus(TextView textTitle, int pos) {
         String notificationStatus = notificationList.get(pos).getStatus();
-        SDKHandler.openNotificationEvent(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink(), notificationModelList.get(pos).getCustomPayload().toString());
+        Netcore.openNotificationEvent(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink(), notificationModelList.get(pos).getCustomPayload().toString());
         if (notificationStatus.equals(text_unread)) {
             notificationStatus = text_read;
             notificationList.get(pos).setStatus(notificationStatus);
@@ -321,8 +319,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     Bundle bundle = new Bundle();
-                    bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, customPayload);
-                    bundle.putString(UIConstants.NC_DEEP_LINK, actionButtonUri.toString());
+                    bundle.putString("customPayload", actionButtonUri.toString());
+                    bundle.putString("deeplink", customPayload);
                     browserIntent.putExtras(bundle);
 
                     mContext.startActivity(browserIntent);
@@ -389,8 +387,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 Bundle bundle = new Bundle();
-                bundle.putString(UIConstants.NC_CUSTOM_PAYLOAD, notificationModel.getCustomPayload().toString());
-                bundle.putString(UIConstants.NC_DEEP_LINK, notificationModel.getDeeplink());
+                bundle.putString("customPayload", notificationModel.getCustomPayload().toString());
+                bundle.putString("deeplink", notificationModel.getDeeplink());
                 browserIntent.putExtras(bundle);
 
                 mContext.startActivity(browserIntent);
@@ -415,7 +413,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     class NotificationViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         private ImageView imgNotification;
-        private TextView textTitle, textSubTitle, textMessage, textDate, text_carousal_message, text_carousal_title;
+        private TextView textTitle, textMessage, textDate, text_carousal_message, text_carousal_title;
         private Button btnActionOne, btnActionTwo, btnActionThree, btnKnowMore;
         private View dividerview, carousalDividerView;
         private ViewPager mPager;
@@ -428,7 +426,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             imgNotification = itemView.findViewById(R.id.notification_row_imageView);
             btnKnowMore = itemView.findViewById(R.id.btn_know_more);
             textTitle = itemView.findViewById(R.id.notification_row_tv_title);
-            textSubTitle = itemView.findViewById(R.id.text_sub_title);
             textMessage = itemView.findViewById(R.id.text_message);
             textDate = itemView.findViewById(R.id.text_date);
             btnActionOne = itemView.findViewById(R.id.btn_action_one);
@@ -441,7 +438,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             cardView = itemView.findViewById(R.id.card);
             text_carousal_message = itemView.findViewById(R.id.notification_row_carousal_message);
             text_carousal_title = itemView.findViewById(R.id.notification_row_carousal_title);
-            carousalDividerView = itemView.findViewById(R.id.carousal_divider_view);
+            carousalDividerView = itemView.findViewById(R.id.carosal_divider_view);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.smartech.demo;
+package com.smartech.nativedemo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.smartech.demo", appContext.getPackageName());
+        assertEquals("com.smartech.nativedemo", appContext.getPackageName());
     }
 }
