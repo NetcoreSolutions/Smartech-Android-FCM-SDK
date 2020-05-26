@@ -1,5 +1,5 @@
 package com.smartech.nativedemo.adapter;
- 
+  
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
