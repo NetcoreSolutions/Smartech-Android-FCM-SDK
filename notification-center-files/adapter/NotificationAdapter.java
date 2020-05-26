@@ -284,7 +284,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 textDate.setText(date);
             }
         }
-
+ 
     }
 
     private void handleActions(final NotificationViewHolder viewHolder, final NotificationList.NotificationModel notificationModel, final int index, final int position) {
