@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import in.netcore.smartechfcm.NetcoreSDK;
 import in.netcore.smartechfcm.notification.SMTNotificationListener;
-import in.netcore.smartechfcm.pushnotification.channel.SmtNotificationChannel;
+import in.netcore.smartechfcm.pushnotification.channel.SMTNotificationChannel;
 
 public class SmartechApplication extends Application implements SMTNotificationListener {
 
@@ -38,7 +38,7 @@ public class SmartechApplication extends Application implements SMTNotificationL
         NetcoreSDK.createNotificationChannelGroup(this, "group1", "group1");
         NetcoreSDK.createNotificationChannelGroup(this, "group2", "group2");
 //
-        SmtNotificationChannel smtNotificationChannel = new SmtNotificationChannel.Builder(
+        SMTNotificationChannel smtNotificationChannel = new SMTNotificationChannel.Builder(
                 "IMPORTANCE_MIN",
                 "IMPORTANCE_MIN",
                 NotificationManager.IMPORTANCE_MIN)
@@ -47,7 +47,7 @@ public class SmartechApplication extends Application implements SMTNotificationL
                 .build();
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(
+        smtNotificationChannel = new SMTNotificationChannel.Builder(
                 "IMPORTANCE_LOW",
                 "IMPORTANCE_LOW",
                 NotificationManager.IMPORTANCE_LOW)
@@ -57,7 +57,7 @@ public class SmartechApplication extends Application implements SMTNotificationL
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(
+        smtNotificationChannel = new SMTNotificationChannel.Builder(
                 "IMPORTANCE_DEFAULT",
                 "IMPORTANCE_DEFAULT",
                 NotificationManager.IMPORTANCE_DEFAULT)
@@ -67,7 +67,7 @@ public class SmartechApplication extends Application implements SMTNotificationL
                 .build();
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(
+        smtNotificationChannel = new SMTNotificationChannel.Builder(
                 "IMPORTANCE_HIGH",
                 "IMPORTANCE_HIGH",
                 NotificationManager.IMPORTANCE_HIGH)
@@ -77,7 +77,7 @@ public class SmartechApplication extends Application implements SMTNotificationL
                 .build();
         NetcoreSDK.createNotificationChannel(this, smtNotificationChannel);
 
-        smtNotificationChannel = new SmtNotificationChannel.Builder(
+        smtNotificationChannel = new SMTNotificationChannel.Builder(
                 "IMPORTANCE_MAX",
                 "IMPORTANCE_MAX",
                 NotificationManager.IMPORTANCE_MAX)

@@ -1,5 +1,5 @@
 package com.smartech.nativedemo.adapter;
-  
+
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide;
 import com.smartech.nativedemo.R;
 import com.smartech.nativedemo.utils.Netcore;
 
+import org.json.JSONObject;
+
 import in.netcore.smartechfcm.notification.ClickInterface;
 import in.netcore.smartechfcm.notification.NotificationList;
 
@@ -24,7 +26,7 @@ public class CarouselAdapter extends PagerAdapter implements View.OnClickListene
     private int notificationPosition;
     private ClickInterface clickInterface;
 
-    public CarouselAdapter(Context context, NotificationList.NotificationModel notification, NotificationList notificationList, int notificationPosition, ClickInterface clickInterface) {
+    CarouselAdapter(Context context, NotificationList.NotificationModel notification, NotificationList notificationList, int notificationPosition, ClickInterface clickInterface) {
         this.context = context;
         this.notification = notification;
         this.notificationList = notificationList;
@@ -54,8 +56,25 @@ public class CarouselAdapter extends PagerAdapter implements View.OnClickListene
                 clickInterface.onCarouselItemClickListener(notification, notificationPosition, Uri.parse(notification.getCarousel().get(position).getImgDeeplink()));
                 if (!notification.getCarousel().get(position).getImgDeeplink().isEmpty() &&
                         notification.getCarousel().get(position).getImgDeeplink() != null) {
-                    //if (notificationList.getStatus().equals("unread")) {
-                    Netcore.openNotificationEvent(context, notification.getTrid(), notification.getDeeplink(), notification.getCustomPayload().toString());
+                    //if (notificationList.getStatus().equals("unread")) {'
+
+                    JSONObject objectPNMeta;
+
+                    try {
+                        objectPNMeta = new JSONObject(notification.getPnMeta().toString());
+                    } catch (Exception e) {
+                        objectPNMeta = new JSONObject();
+                    }
+
+                    JSONObject objectCustomPayload;
+                    try {
+                        objectCustomPayload = new JSONObject(notification.getCustomPayload().toString());
+                    } catch (Exception e) {
+                        objectCustomPayload = new JSONObject();
+                    }
+
+                    Netcore.openNotificationEvent(context, objectPNMeta, notification.getTrid(), notification.getDeeplink(), objectCustomPayload.toString());
+
                     //}
                 }
             }

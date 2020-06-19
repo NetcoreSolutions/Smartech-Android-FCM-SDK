@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,6 +92,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.textTitle.setTypeface(null,
                 notificationList.get(position).getStatus().equals(text_read) ? Typeface.NORMAL : Typeface.BOLD);
         holder.textTitle.setText(notificationModel.getTitle() != null ? notificationModel.getTitle() : "");
+//        holder.textSubTitle.setText(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : "");
         holder.textMessage.setText(notificationModel.getMessage() != null ? notificationModel.getMessage() : "");
 
         if (notificationModel.getImage() != null && !notificationModel.getImage().equals("")) {
@@ -261,13 +261,33 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     private void setNotificationStatus(TextView textTitle, int pos) {
-        String notificationStatus = notificationList.get(pos).getStatus();
-        Netcore.openNotificationEvent(mContext, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink(), notificationModelList.get(pos).getCustomPayload().toString());
-        if (notificationStatus.equals(text_unread)) {
-            notificationStatus = text_read;
-            notificationList.get(pos).setStatus(notificationStatus);
+        try {
+            String notificationStatus = notificationList.get(pos).getStatus();
+
+            JSONObject object;
+            try {
+                object = new JSONObject(notificationModelList.get(pos).getPnMeta().toString());
+            } catch (Exception e) {
+                object = new JSONObject();
+            }
+
+            JSONObject objectCustomPayload;
+            try {
+                objectCustomPayload = new JSONObject(notificationModelList.get(pos).getCustomPayload().toString());
+            } catch (Exception e) {
+                objectCustomPayload = new JSONObject();
+            }
+
+            Netcore.openNotificationEvent(mContext, object, notificationModelList.get(pos).getTrid(), notificationModelList.get(pos).getDeeplink(), objectCustomPayload.toString());
+            if (notificationStatus.equals(text_unread)) {
+                notificationStatus = text_read;
+                notificationList.get(pos).setStatus(notificationStatus);
+            }
+            textTitle.setTypeface(null, notificationStatus.equals(text_read) ? Typeface.NORMAL : Typeface.BOLD);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        textTitle.setTypeface(null, notificationStatus.equals(text_read) ? Typeface.NORMAL : Typeface.BOLD);
+
     }
 
     private void setUpDate(TextView textDate, String strDate) {
@@ -341,7 +361,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 NotificationList.NotificationModel notificatonModel = gson.fromJson(msgJsonString, NotificationList.NotificationModel.class);
                 notificationModelList.add(notificatonModel);
             } catch (Exception e) {
-                Log.e(TAG, "Error: " + e.getMessage());
+                e.printStackTrace();
             }
         }
         notifyDataSetChanged();
@@ -413,7 +433,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     class NotificationViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         private ImageView imgNotification;
-        private TextView textTitle, textMessage, textDate, text_carousal_message, text_carousal_title;
+        private TextView textTitle, textSubTitle, textMessage, textDate, text_carousal_message, text_carousal_title;
         private Button btnActionOne, btnActionTwo, btnActionThree, btnKnowMore;
         private View dividerview, carousalDividerView;
         private ViewPager mPager;
@@ -426,6 +446,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             imgNotification = itemView.findViewById(R.id.notification_row_imageView);
             btnKnowMore = itemView.findViewById(R.id.btn_know_more);
             textTitle = itemView.findViewById(R.id.notification_row_tv_title);
+            textSubTitle = itemView.findViewById(R.id.text_sub_title);
             textMessage = itemView.findViewById(R.id.text_message);
             textDate = itemView.findViewById(R.id.text_date);
             btnActionOne = itemView.findViewById(R.id.btn_action_one);
@@ -438,7 +459,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             cardView = itemView.findViewById(R.id.card);
             text_carousal_message = itemView.findViewById(R.id.notification_row_carousal_message);
             text_carousal_title = itemView.findViewById(R.id.notification_row_carousal_title);
-            carousalDividerView = itemView.findViewById(R.id.carosal_divider_view);
+            carousalDividerView = itemView.findViewById(R.id.carousal_divider_view);
         }
     }
 }

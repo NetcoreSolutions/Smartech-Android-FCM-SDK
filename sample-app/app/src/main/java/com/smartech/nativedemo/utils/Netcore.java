@@ -67,8 +67,8 @@ public class Netcore {
         return NetcoreSDK.getUnreadNotificationsCount(context);
     }
 
-    public static void openNotificationEvent(Context context, String trID, String deeplink, String customPayload) {
-        NetcoreSDK.openNotificationEvent(context, trID, deeplink, customPayload);
+    public static void openNotificationEvent(Context context, JSONObject pnMeta, String trID, String deeplink, String customPayload) {
+        NetcoreSDK.openNotificationEvent(context, pnMeta, trID, deeplink, customPayload);
     }
 
     public static void optOut(Context context, boolean optOut) {

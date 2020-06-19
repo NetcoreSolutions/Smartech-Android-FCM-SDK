@@ -12,12 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.smartech.nativedemo.MainActivity;
 import com.smartech.nativedemo.R;
-import com.smartech.nativedemo.utils.Netcore;
 import com.smartech.nativedemo.adapter.NotificationAdapter;
+import com.smartech.nativedemo.utils.Netcore;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
     private List<String> listDeleteNotifications;
     private Gson gson;
     private RecyclerView notificationRecycler;
-    private Toolbar activityNotificationToolbar;
     private ImageView actvityNotificationDeleteIcon, emptyNotificationPlaceholder;
 
     @Override
@@ -40,22 +38,19 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
         setContentView(R.layout.activity_notification_center);
 
         notificationRecycler = findViewById(R.id.notification_recycler);
-        activityNotificationToolbar = findViewById(R.id.activity_notification_toolbar);
         actvityNotificationDeleteIcon = findViewById(R.id.actvity_notification_delete_icon);
         emptyNotificationPlaceholder = findViewById(R.id.activity_notification_ceneter_placeholder);
         gson = new Gson();
         listDeleteNotifications = new ArrayList<>();
 
         handleNotificationData();
+        Toolbar activityNotificationToolbar = findViewById(R.id.activity_notification_toolbar);
         activityNotificationToolbar.setTitle("Notification Manager");
         activityNotificationToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         activityNotificationToolbar.setNavigationIcon(R.drawable.ic_arrow_left);
         activityNotificationToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         setSupportActionBar(activityNotificationToolbar);
-     /*   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
-
 
         actvityNotificationDeleteIcon.setOnClickListener(this);
     }
@@ -68,6 +63,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
                 .setMessage("Are you sure you want to delete " + listDeleteNotifications.size() + stringNotificationCount)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Netcore.deleteNotification(getApplicationContext(), listDeleteNotifications);
                         handleNotificationData();
@@ -93,7 +89,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
                 emptyNotificationPlaceholder.setVisibility(View.GONE);
                 setUpView(notificationList);
             }
-        } catch (JsonSyntaxException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -134,10 +130,8 @@ public class NotificationCenterActivity extends AppCompatActivity implements Del
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.actvity_notification_delete_icon:
-                showDeleteNotificationAlert();
-                break;
+        if (v.getId() == R.id.actvity_notification_delete_icon) {
+            showDeleteNotificationAlert();
         }
     }
 }

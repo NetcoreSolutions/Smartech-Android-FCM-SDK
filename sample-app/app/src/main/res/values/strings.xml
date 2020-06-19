@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Netcore FCM</string>
+    <string name="app_name">Netcore SDK Demo app</string>
     <string name="app_id">Application Id</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

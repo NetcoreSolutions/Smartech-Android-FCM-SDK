@@ -219,10 +219,10 @@ public class MainActivity extends AppCompatActivity {
         }
         if (btnGetNotification != null) {
             if (Build.VERSION.SDK_INT >= 21) {
-                textNotificationCount.setText("" + Netcore.getUnreadNotificationsCount(this));
+//                textNotificationCount.setText("" + Netcore.getUnreadNotificationsCount(this));
                 btnGetNotification.setText("Notification center");
             } else {
-                btnGetNotification.setText("Notification center - unread(" + Netcore.getUnreadNotificationsCount(this) + ")");
+//                btnGetNotification.setText("Notification center - unread(" + Netcore.getUnreadNotificationsCount(this) + ")");
             }
 
         }
