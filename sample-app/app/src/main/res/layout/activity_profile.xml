@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_profile_til_name"
         android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
@@ -23,9 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter name" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_profile_til_email"
         android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
@@ -39,10 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter email" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_profile_til_age"
         android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
@@ -58,10 +58,10 @@
             android:inputType="number"
             android:maxLength="3"
             android:hint="Enter age" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_profile_til_mobile_no"
         android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
@@ -76,10 +76,10 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Enter mobile number" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_profile_til_dob"
         android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
@@ -93,9 +93,9 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:hint="Enter DOB" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_profile_til_salary"
         android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
@@ -110,9 +110,9 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Enter salary" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_profile_til_website"
         android:layout_width="@dimen/zero_margin"
         android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:inputType="textUri"
             android:hint="Enter website" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/activity_profile_btn_save"

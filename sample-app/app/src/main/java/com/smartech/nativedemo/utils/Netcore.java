@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import in.netcore.smartechfcm.NetcoreSDK;
+import in.netcore.smartechfcm.inapp.InAppCustomHTMLListener;
 import in.netcore.smartechfcm.notification.SMTNotificationListener;
 
 public class Netcore {
@@ -111,5 +112,11 @@ public class Netcore {
         NetcoreSDK.setSMTNotificationListener(listener);
     }
 
+    public static void setInAppCustomHTMLListener(InAppCustomHTMLListener listener) {
+        NetcoreSDK.setInAppCustomHTMLListener(listener);
+    }
 
+    public static void setDebugLevel(Context context, int level) {
+        NetcoreSDK.setDebugLevel(context, level);
+    }
 }

@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_other_function_til_lattitude"
             android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
@@ -26,9 +26,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:hint="Enter lattitude" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_other_function_til_longitude"
             android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:hint="Enter longitude" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/activity_other_function_btn_set_location"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="@+id/activity_other_function_til_longitude"
             app:layout_constraintTop_toBottomOf="@+id/activity_other_function_til_longitude" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_other_function_til_set_token"
             android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter push token" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/activity_other_function_btn_set_token"
@@ -117,7 +117,7 @@
             app:layout_constraintEnd_toEndOf="@+id/activity_other_function_btn_get_token"
             app:layout_constraintStart_toStartOf="@+id/activity_other_function_btn_get_token"
             app:layout_constraintTop_toBottomOf="@+id/activity_other_function_btn_get_token" />
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_other_function_txt_appid"
             android:layout_width="@dimen/zero_margin"
             android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Application ID" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/activity_other_function_change_app_id"
             android:layout_width="@dimen/zero_margin"

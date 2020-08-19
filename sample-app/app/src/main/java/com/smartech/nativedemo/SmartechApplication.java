@@ -9,11 +9,15 @@ import com.smartech.nativedemo.utils.Netcore;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import in.netcore.smartechfcm.NetcoreSDK;
+import in.netcore.smartechfcm.inapp.InAppCustomHTMLListener;
+import in.netcore.smartechfcm.logger.NCLogger;
 import in.netcore.smartechfcm.notification.SMTNotificationListener;
 import in.netcore.smartechfcm.pushnotification.channel.SMTNotificationChannel;
 
-public class SmartechApplication extends Application implements SMTNotificationListener {
+public class SmartechApplication extends Application implements SMTNotificationListener, InAppCustomHTMLListener {
 
     public static final String TAG = SmartechApplication.class.getSimpleName();
 
@@ -21,8 +25,10 @@ public class SmartechApplication extends Application implements SMTNotificationL
     public void onCreate() {
         super.onCreate();
 
+        Netcore.setDebugLevel(this, NCLogger.Level.LOG_LEVEL_VERBOSE);
         Netcore.register(this);
         Netcore.setSMTNotificationListener(this);
+        Netcore.setInAppCustomHTMLListener(this);
         Netcore.setPushIconColor(this, Color.RED);
         createDemoChannel();
     }
@@ -88,20 +94,8 @@ public class SmartechApplication extends Application implements SMTNotificationL
 
     }
 
-    /*private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            NotificationChannel channel = new NotificationChannel("app_channel", "app_channel", NotificationManager.IMPORTANCE_HIGH);
-            channel.setDescription("test1");
-            channel.setSound(CommonUtils.getSoundUri(this, "s4"), new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build());
-            notificationManager.createNotificationChannel(channel);
-
-            channel = new NotificationChannel("app_channel1", "app_channel1", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("test2");
-            notificationManager.createNotificationChannel(channel);
-        }
-    }*/
+    @Override
+    public void customHTMLCallback(HashMap<String, Object> hashMap) {
+        Log.d(TAG, "customHTMLCallback: " + hashMap);
+    }
 }
