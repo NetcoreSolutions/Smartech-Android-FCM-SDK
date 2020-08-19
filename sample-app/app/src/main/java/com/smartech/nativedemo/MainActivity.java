@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.btn_get_notification:
-                        startActivity(new Intent(MainActivity.this, NotificationCenterActivity.class));
+                        //startActivity(new Intent(MainActivity.this, NotificationCenterActivity.class));
                         break;
 
                     case R.id.btn_logout:
